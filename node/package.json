@@ -1,0 +1,30 @@
+{
+  "name": "hello world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "Bartosz Konieczny",
+  "license": "ISC",
+  "dependencies": {
+    "connect-redis": "^7.0.1",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "redis": "^4.6.5"
+  },
+  "nodemonConfig": {
+    "delay": 500,
+    "watch": [
+      "./"
+    ],
+    "ignore": [
+      ".git",
+      "node_modules"
+    ]
+  }
+}

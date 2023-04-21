@@ -1,0 +1,41 @@
+version: "2"
+services:
+  node:
+    image: "node:19"
+    user: 1000:1000
+    networks:
+      - spotify_app
+    ports:
+      - "3002:3002"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./node:/home/node/app
+    command: "npm start"
+    
+    
+  redis:
+    image: redis
+    user: 1000:1000
+    networks: 
+      - spotify_app
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server --requirepass passwd --save 60 1 --loglevel warning
+    
+  insights:
+    image: redislabs/redisinsight:latest
+    user: 1000:1000
+    networks:
+      - spotify_app
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./redisinsight/:/db
+
+networks:
+  spotify_app:
+    name: spotify_app
+
