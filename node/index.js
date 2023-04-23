@@ -12,9 +12,8 @@ import { wwwFormURL, randomString } from './utils.js'
 import * as userController from './controllers/user.js';
 import * as oAuthController from './controllers/oAuth.js';
 
+
 const app = express();
-
-
 const port = 3002;
 const ssl_options = {
   key:   fs.readFileSync( 'private/localhost.key' ),
@@ -58,6 +57,10 @@ app.get('/oauth', oAuthController.closeAuthCodeFlow);
 
 app.get('/api/user', userController.getUser);
 app.get('/api/top', userController.getTop);
+
+app.get('/api/track/:id', userController.getTrack);
+
+
 
 
 app.get('/', function (req, res) {

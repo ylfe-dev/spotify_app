@@ -1,5 +1,6 @@
 version: "2"
 services:
+
   node:
     image: "node:19"
     user: 1000:1000
@@ -13,6 +14,24 @@ services:
     volumes:
       - ./node:/home/node/app
     command: "npm start"
+    depends_on:
+      - redis
+    
+    
+  ftontend:
+    image: "node:19"
+    user: 1000:1000
+    networks:
+      - spotify_app
+    ports:
+      - "3001:3001"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./frontend:/home/node/app
+    command: "npm start"
+    
     
     
   redis:

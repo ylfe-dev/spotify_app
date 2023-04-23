@@ -27,3 +27,14 @@ export const getTop = (req, res) => {
 	) 
 }
 
+export const getTrack = (req, res) => {
+	getToken(req.session.user)
+	.then(
+		token => spotifyAPI("tracks/"+req.params.id, token)
+		  .then(
+		    json => res.json(json),
+		    error => res.sendStatus(error)
+		  ),
+		invalid_token => {res.sendStatus(401)}
+	) 
+}
