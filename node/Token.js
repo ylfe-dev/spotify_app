@@ -5,7 +5,7 @@ import client from './private/client.js'
 
 const client_auth = Buffer.from(client.id + ':' + client.secret).toString('base64');
 const app_auth_scopes = `user-read-private user-read-email user-top-read user-follow-read user-library-read`;
-const oauth_uri = 'https://localhost:3002/oauth';
+const oauth_uri = 'http://localhost:3001/oauth';
 
 
 const accountsAPI = (data) => {
@@ -87,8 +87,7 @@ export const oAuthURL = () => { // PKCE!
 const exchangeRefreshTokenForToken = refresh_token => {
 	const refreshToken = wwwFormURL({
 		grant_type: "refresh_token",
-		refresh_token: refresh_token,
-		redirect_uri:"https://localhost:3002/oauth"
+		refresh_token: refresh_token
 	});
 	return request(accountsAPI(refreshToken)).then(data => JSON.parse(data));
 }
@@ -97,7 +96,7 @@ export const exchangeCodeForToken = code => {
 	const exchangeCode = wwwFormURL({
 		grant_type: "authorization_code",
 		code: code,
-		redirect_uri:"https://localhost:3002/oauth"
+		redirect_uri:oauth_uri
 	});
 	return request(accountsAPI(exchangeCode)).then(data => JSON.parse(data));
 }

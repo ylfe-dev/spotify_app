@@ -6,11 +6,11 @@ import spotifyAPI from "../spotifyAPI.js";
 export const redirectToAuthCodeFlow = (req, res) => {
 	getToken( req.session.user )
   .then(
-		token    => res.json({link: false}),
+		token    => res.sendStatus(401),
 		no_token => {
 	    const [link, state] = oAuthURL()
 	    req.session.oath_state = state; //PCKE
-	    res.json({link: link});
+	    res.json(link);
 		}
 	) 
 }
@@ -35,20 +35,20 @@ export const closeAuthCodeFlow = (req, res) => {
         }))
         .then(() => {
           req.session.user = user.email;
-          res.redirect("/api/top");
+          res.json(user);
         })
       })
     })
     .catch( error => {
     	console.error("oAuth exchange error: "+error);
-    	res.redirect("/oauth_error");
+    	res.sendStatus(401);
     }
     )
   } else if(error){
   	console.error("oAuth error: "+error);
-    res.redirect("/oauth_error");
+    res.sendStatus(401);
   } else
-    res.redirect("/oauth_error");
+    res.sendStatus(401);
 }
 
 export const logout = (req, res) => {

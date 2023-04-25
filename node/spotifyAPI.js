@@ -4,7 +4,7 @@ import request from './request.js';
 const spotifyAPI = (path, token) => {
   console.log("Request API with token")
   const promise = request(getAPI(path, token))
-    .then( data => JSON.parse(data) );
+    .then( data => JSON.parse(data), err => err );
 
   return promise;
 

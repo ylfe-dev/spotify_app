@@ -1,34 +1,36 @@
-import {Outlet, useParams, useLoaderData, Await} from "react-router-dom";
-import {useEffect, useState, Suspense} from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import './App.scss';
 
+import { useParams, useLoaderData, useLocation } from "react-router-dom";
+import {useEffect, useState, Suspense, useContext} from 'react'
 
-import './App.css';
+import { AuthContext } from "./ContextProvider";
+import { suspensePromise, wait } from './utils'
 
 import Background from './components/Background'
+import Spinner from './components/Spinner'
+import Private from './containers/Private'
+import Public from './containers/Public'
 
 
-function App() {
+
+
+const App = ({refresh_user}) => {
+
+  const userContext = useContext(AuthContext);
   const {artist, album} = useParams();
 
-  const [data, setData] = useState()
-  useEffect(()=>{
-    fetch("/login")
-    .then(data => data.json())
-    .then(json => console.log(json))
-  },[])
+ 
+  
 
+  
 
-  return (
-    <>
-      <Background />
-      <h1>HelloWorld</h1>
-      <FontAwesomeIcon className = "load-spinner" icon={faSpinner} />
-      <p>{artist? "artist: "+artist : ""}</p>
-      <p>{album? "album: "+album : ""}</p> 
-    </>
-  );
+  if(userContext.user)  return <Private />
+  else                  return <Public />
+ 
 }
 
 export default App;
+
+
+
+

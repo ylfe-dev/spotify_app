@@ -1,0 +1,2 @@
+WARNING 2023-04-25 10:36:25,245 django.request Not Found: /api/instance/437ea59a-6631-495b-9081-eb4c3340b02b/value-details/
+WARNING 2023-04-25 10:36:25,254 django.request Not Found: /api/instance/437ea59a-6631-495b-9081-eb4c3340b02b/key-metadata/

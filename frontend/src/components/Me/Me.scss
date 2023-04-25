@@ -1,0 +1,11 @@
+@import "../../envirement.scss";
+
+.app-me {
+	border-radius: calc(( 3rem + 8px )/2);
+	
+	@media only screen and (min-width: $screen-m) {
+		border-radius: 10px;
+		border-top-left-radius: calc(( 3rem + 8px )/2);
+		border-top-right-radius: calc(( 3rem + 8px )/2);
+	}
+}

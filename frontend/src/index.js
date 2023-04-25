@@ -5,15 +5,18 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import Router from "./Router";
+import ContextProvider from "./ContextProvider";
 
 
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router />
-  </React.StrictMode>
+ 
+    <ContextProvider>
+      <Router />
+    </ContextProvider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function

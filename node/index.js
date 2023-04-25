@@ -48,19 +48,24 @@ app.use(session({
 
 
 
+app.get('/api/oauth_link', oAuthController.redirectToAuthCodeFlow);
+app.get('/api/oauth_logout', oAuthController.logout);
+app.get('/api/oauth', oAuthController.closeAuthCodeFlow);
 
-app.get('/oauth_error', (req,res)=>{res.send("oAuth failed :(")});
-
-app.get('/login', oAuthController.redirectToAuthCodeFlow);
-app.get('/logout', oAuthController.logout);
-app.get('/oauth', oAuthController.closeAuthCodeFlow);
 
 app.get('/api/user', userController.getUser);
-app.get('/api/top', userController.getTop);
+app.get('/api/user/top', userController.getUserTop);
+app.get('/api/user/saved', userController.getUserSaved);
+app.get('/api/user/albums', userController.getUserAlbums);
+app.get('/api/user/playlists', userController.getUserPlaylists);
 
-app.get('/api/track/:id', userController.getTrack);
+app.get('/api/album/:id', userController.getAlbum);
 
+app.get('/api/playlist/:id', userController.getPlaylist);
 
+app.get('/api/artist/:id', userController.getArtist);
+app.get('/api/artist/:id/top', userController.getArtistTop);
+app.get('/api/artist/:id/albums', userController.getArtistAlbums);
 
 
 app.get('/', function (req, res) {
