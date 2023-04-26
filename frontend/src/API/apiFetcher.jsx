@@ -1,20 +1,34 @@
+import cloneDeep from 'lodash.clonedeep';
+const apiCache = new Map();
 
 
-export default function apiFetcher(path) {
-	return fetch("api/"+path)
-	.then(res => {
-		console.log("Fetch status("+path+"): "+ res.status)
+export default async function apiFetcher(path, cache_time=false) {
+	console.log("run apiFetcher...")
+	if( !apiCache.has(path) || (apiCache.get(path).expires - Date.now()) <= 0 ){
+		const promise = fetch("api/"+path)
+			.then(res => {
+				console.log("Fetch status("+path+"): "+ res.status)
+				if(res.ok) 
+					return res.json()
+				else 
+					throw res.status; 
+			})
+			.catch(error=>{
+				console.error("Fetch error: "+error);
+				if(error==401) return null;
+				return new Promise((resolve) => 
+			    setTimeout(()=>{
+			    	console.log("Retrying...");
+			    	resolve(apiFetcher(path,cache_time))
+			    }, 2000)
+				);
+			})
 
-		if(res.ok) 
-			return res.json()
-		else if(res.status==401) 
-			throw "denied"; //redirect
-		else 
-			throw "error"; //retry
-
-	}).then(json => ({status:"success", data: json}))
-	.catch(error=>{
-		console.log("Fetch error: "+error);
-		return {status:error}
-	})
+			if(!cache_time) 
+				return promise;
+			else
+				apiCache.set(path, {request:promise, expires: Date.now()+cache_time})
+		}else console.log("Fetched ("+path+") from cache.")
+		const response = await apiCache.get(path).request;
+		return cloneDeep(response)
 }

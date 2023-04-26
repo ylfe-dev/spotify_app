@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { ThemeContext } from "../ContextProvider";
 
 const Background = () => {
-  const theme = useContext(ThemeContext)
+  const { theme } = useContext(ThemeContext)
   const [leyer, setLeyer] = useState(false)
   const [image, setImage] = useState(basic_background)
 

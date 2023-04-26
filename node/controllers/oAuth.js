@@ -1,19 +1,25 @@
 import { exchangeCodeForToken, oAuthURL, getToken } from "../Token.js"
 import { getUser }  from './user.js';
-import {RedisClient} from '../redis_db.js'
-import spotifyAPI from "../spotifyAPI.js";
+import { RedisClient } from '../redis_db.js'
+import { spotifyAPI } from "../spotifyAPI.js";
 
-export const redirectToAuthCodeFlow = (req, res) => {
+export const probeSession = (req, res) => {
 	getToken( req.session.user )
   .then(
-		token    => res.sendStatus(401),
+		token => spotifyAPI("me", token)
+              .then(
+                user => res.json({user: user}), 
+                error => res.sendStatus(error)
+              ),
 		no_token => {
 	    const [link, state] = oAuthURL()
-	    req.session.oath_state = state; //PCKE
-	    res.json(link);
+	    req.session.oath_state = state; //no PCKE s256
+	    res.json({user:false, oauth_link:link});
 		}
 	) 
 }
+
+
 
 export const closeAuthCodeFlow = (req, res) => {
 	const code  = req.query.code  || null,
@@ -35,7 +41,7 @@ export const closeAuthCodeFlow = (req, res) => {
         }))
         .then(() => {
           req.session.user = user.email;
-          res.json(user);
+          res.json({user:user});
         })
       })
     })
@@ -50,6 +56,9 @@ export const closeAuthCodeFlow = (req, res) => {
   } else
     res.sendStatus(401);
 }
+
+
+
 
 export const logout = (req, res) => {
   req.session.user = false;

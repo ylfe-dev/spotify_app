@@ -1,31 +1,27 @@
 import './App.scss';
 
-import { useParams, useLoaderData, useLocation } from "react-router-dom";
-import {useEffect, useState, Suspense, useContext} from 'react'
+import { useParams } from "react-router-dom";
+import { useContext } from 'react'
 
 import { AuthContext } from "./ContextProvider";
-import { suspensePromise, wait } from './utils'
 
-import Background from './components/Background'
-import Spinner from './components/Spinner'
+
 import Private from './containers/Private'
 import Public from './containers/Public'
 
 
 
 
-const App = ({refresh_user}) => {
+const App = () => {
 
   const userContext = useContext(AuthContext);
-  const {artist, album} = useParams();
+  // const {artist, album} = useParams();
+    console.log("App rerender")
 
- 
-  
-
-  
-
-  if(userContext.user)  return <Private />
-  else                  return <Public />
+  if(userContext.user)  
+    return <Private />
+  else 
+    return <Public />
  
 }
 

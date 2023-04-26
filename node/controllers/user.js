@@ -1,124 +1,14 @@
 import { getToken } from "../Token.js"
-import spotifyAPI from "../spotifyAPI.js"
+import { spotifyGET } from "../spotifyAPI.js"
 
-export const getUser = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("me", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		no_token => res.sendStatus(401)
-	)
-}
+export const getUser = (req, res) => spotifyGET(req, res, "me")
 
-export const getUserTop = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("me/top/artists?time_range=medium_term&limit=10&offset=0", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
+export const getUserTopArtists = (req, res) => spotifyGET(req, res, "me/top/artists")
 
-export const getUserSaved = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("me/tracks", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
+export const getUserTopTracks = (req, res) => spotifyGET(req, res, "me/top/tracks")
 
-export const getUserPlaylists = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("me/playlists", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
+export const getUserSaved = (req, res) => spotifyGET(req, res, "me/tracks")
 
-export const getUserAlbums = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("me/albums", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
+export const getUserPlaylists = (req, res) => spotifyGET(req, res, "me/playlists")
 
-
-
-export const getAlbum = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("albums/"+req.params.id, token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
-
-export const getPlaylist = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("playlists/"+req.params.id, token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
-
-
-
-export const getArtist = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("artists/"+req.params.id, token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
-export const getArtistTop = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("artists/"+req.params.id+"/top-tracks", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
-export const getArtistAlbums = (req, res) => {
-	getToken(req.session.user)
-	.then(
-		token => spotifyAPI("artists/"+req.params.id+"/albums", token)
-		  .then(
-		    json => res.json(json),
-		    error => res.sendStatus(error)
-		  ),
-		invalid_token => {res.sendStatus(401)}
-	) 
-}
+export const getUserAlbums = (req, res) => spotifyGET(req, res, "me/albums")

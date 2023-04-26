@@ -2,25 +2,71 @@
 	padding:0;
 	li {
 		display: grid;
-		grid-template-columns: auto 1fr auto auto auto;
-		margin-bottom:1rem;
+		grid-template-columns: auto 1fr auto;
 		align-items: center;
-
-		.track-image{
-			width: 40px !important;
+		
+		
+		&:hover {
+			cursor: pointer;
+			
+			.play-button{
+				transform: rotateY(0deg);
+				opacity: 1;
+			}
+			.track-image{
+				transform: rotateY(-90deg);
+				//opacity: 0;
+			}
 		}
+		.play-button{
+			transform: rotateY(90deg);
+			opacity:0;
+			position:absolute;
+			text-decoration: none;
+			border:0;
+			background-color: unset;
+			color:white;
+			font-size: 1.5rem;
+			display: inline-block;
+			margin:0;
+			padding: 0.5rem;
+			transition: all .8s;
+			&:hover{
+				cursor: pointer;
+
+			}
+		}
+		.before-title{
+			.track-image{
+				width: 40px !important;
+				margin-right: 1rem;
+				transition: all 0.3s;
+			}
+		}
+		
 		.track-title {
-			padding-left:1rem;
-			.track-name {
+			padding: 0.8rem 0;
+			overflow-x: hidden;
+			.track-name, .track-artists{
 				margin:0;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 			.track-artists {
-				margin:0;
 				font-size: 10pt;
 				span {
 					margin-right: 0.5rem;
+					&:hover {
+						cursor: pointer;
+						text-decoration: underline;
+					}
 				}
 			}
+		}
+		.after-title{
+			display: grid;
+			grid-template-columns: auto auto auto;
 		}
 	}
 

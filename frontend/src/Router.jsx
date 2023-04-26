@@ -26,12 +26,8 @@ const Router = () => {
           element: <App />
         },
         {
-          path: "/:artist/:album?",
+          path: "/artist/:artist/:album?",
           element: <App />
-        },
-        {
-          path: "/me",
-          element: <App refresh_user={true} />
         },
         {
           path: "/oauth",

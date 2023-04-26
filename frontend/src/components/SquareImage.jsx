@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Suspense } from 'react';
 import "./SquareImage.scss";
-import { suspensePromise, wait } from '../utils'
+import { suspensePromise } from '../utils'
 
 const SquareImage = ({src, className, radius=0, size="auto"}) => {
 

@@ -1,9 +1,10 @@
+import { useState } from 'react'
 import { createContext } from 'react';
-import {useEffect, useState, useRef, Suspense} from 'react'
 
 
 export const ThemeContext = createContext(null);
 export const AuthContext = createContext(null);
+
 
 const ContextProvider = ({children})=> {
 	const [theme, setTheme] = useState(null);

@@ -14,7 +14,7 @@ import About from "../components/About"
 
 
 const Private = () => {
-
+  console.log("Private rerender")
 
   return (
     <main className="app-private">

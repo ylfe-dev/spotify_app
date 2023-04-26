@@ -71,14 +71,14 @@
 
 
 .placeholder{
-	background-color: black;
+	background-color: grey;
 	animation:1s placeholder infinite alternate;
 }
 
 
 @keyframes placeholder {
-	from { opacity: 0 }
-  to   { opacity: 0.5 }
+	from { opacity: 0.3 }
+  to   { opacity: 0.8 }
 }
 
 @keyframes fadein {

@@ -30,9 +30,9 @@ export const suspensePromise = promise => {
 }
   
 export const wait = (ms, data) =>{
-  return suspensePromise(new Promise((resolve) => 
+  return new Promise((resolve) => 
     setTimeout(()=>resolve(data), ms)
-  ));
+  );
 }
 
 
