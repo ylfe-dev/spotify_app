@@ -11,7 +11,7 @@ const  Saved = () => {
     <section className="user-saved">
       <h3>Saved</h3>
       <Suspense fallback={<p>loading...</p>}>
-        <StaticTrackList tracks={saved_promise} limit={10} image   />
+        <StaticTrackList tracks={saved_promise} image />
       </Suspense>
     </section>
   );

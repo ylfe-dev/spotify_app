@@ -32,16 +32,14 @@ export default request;
 
 
 const prettyError = (res_code, res_data, req_header, req_data=false ) => `
-	\n\nREQUEST
-	\n----------------------------
-	\n---HEADER:
-	\n${JSON.stringify(req_header)}
-	  ${req_data? "---BODY:\n"+req_data : ""}
-	\n\nRESPONSE
-	\n----------------------------
-	\n---CODE: ${res_code}
-	\n---DATA:
-	\n${res_data}
+	\n\nREQUEST\n----------------------------
+	---HEADER:
+	${JSON.stringify(req_header)}
+	${req_data? "---BODY:\n"+req_data : ""}
+	\nRESPONSE\n----------------------------
+	---CODE: ${res_code}
+	---DATA:
+	${res_data}
 	\n\n
 `;
 

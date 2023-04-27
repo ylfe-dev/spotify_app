@@ -1,24 +1,20 @@
+.track-scroller {
+	height: 10rem;
+}
 .track-list {
 	padding:0;
+	margin:0;
+	user-select: none;
 	li {
 		display: grid;
 		grid-template-columns: auto 1fr auto;
 		align-items: center;
+		position: relative;
 		
-		
-		&:hover {
-			cursor: pointer;
-			
-			.play-button{
-				transform: rotateY(0deg);
-				opacity: 1;
-			}
-			.track-image{
-				transform: rotateY(-90deg);
-				//opacity: 0;
-			}
-		}
 		.play-button{
+			top:0;
+			bottom:0;
+			left:0;
 			transform: rotateY(90deg);
 			opacity:0;
 			position:absolute;
@@ -29,14 +25,16 @@
 			font-size: 1.5rem;
 			display: inline-block;
 			margin:0;
-			padding: 0.5rem;
-			transition: all .8s;
+			padding: 0.5rem 1rem 0.5rem 0.5rem;
+			transition: all .4s;
 			&:hover{
 				cursor: pointer;
-
+				opacity:0.5 !important;
 			}
 		}
 		.before-title{
+			display: grid;
+			align-content: center;
 			.track-image{
 				width: 40px !important;
 				margin-right: 1rem;
@@ -45,7 +43,7 @@
 		}
 		
 		.track-title {
-			padding: 0.8rem 0;
+			padding: 0.7rem 0;
 			overflow-x: hidden;
 			.track-name, .track-artists{
 				margin:0;
@@ -70,8 +68,20 @@
 		}
 	}
 
-	&.no-index li::marker {
-		content:"";
+	&.no-index {
+		li:hover {
+			//cursor: pointer;
+			.play-button{
+				transform: rotateY(0deg);
+				opacity: 1;
+			}
+			.track-image{
+				transform: rotateY(-90deg);
+			}
+		}
+		li::marker {
+			content:"";
+		}
 	}
 	li::marker {
 		

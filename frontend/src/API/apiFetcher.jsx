@@ -3,9 +3,9 @@ const apiCache = new Map();
 
 
 export default async function apiFetcher(path, cache_time=false) {
-	console.log("run apiFetcher...")
+	console.log("run apiFetcher("+path+")")
 	if( !apiCache.has(path) || (apiCache.get(path).expires - Date.now()) <= 0 ){
-		const promise = fetch("api/"+path)
+		const promise = fetch(window.location.origin+"/api/"+path)
 			.then(res => {
 				console.log("Fetch status("+path+"): "+ res.status)
 				if(res.ok) 

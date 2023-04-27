@@ -18,23 +18,24 @@ import user  from '../API/user'
 export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popularity, duration}) => {
 
   const tracks_obj = tracks.read();
-
   if(tracks_obj) 
     return (
-      <ol className={"track-list "+(indexed ? "" : "no-index")}>
-        {tracks_obj.items.map((item, index)=> {
-          if( index < limit) 
-            return <Track 
-              key={index}
-              name={item.track.name}
-              artists={item.track.artists} 
-              id={item.track.id} 
-              image={image ? item.track.album.images[item.track.album.images.length-1].url : false}
-              album={album ? item.track.album.name: false}
-              popularity={popularity? item.track.popularity : false}
-              duration={duration ? item.track.duration_ms/1000 : false}/>
-        })}
-      </ol>
+      <div className="track-scroller scroller">
+        <ol className={"track-list "+(indexed ? "" : "no-index")}>
+          {tracks_obj.items.map((item, index)=> {
+            if( index < limit) 
+              return <Track 
+                key={index}
+                name={item.track.name}
+                artists={item.track.artists} 
+                id={item.track.id} 
+                image={image ? item.track.album.images[item.track.album.images.length-1].url : false}
+                album={album ? item.track.album.name: false}
+                popularity={popularity? item.track.popularity : false}
+                duration={duration ? item.track.duration_ms/1000 : false}/>
+          })}
+        </ol>
+      </div>
     );
   else 
     return null;
@@ -43,18 +44,20 @@ export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popul
 
 
 
-export const  TrackList = ({tracks, indexed, ...details }) => {
-  const tracks_obj = tracks.read();
-
-  if(tracks_obj) 
+export const  TrackList = ({collection}) => {
+  const resolved_collection = collection.read().tracks;
+  console.log(resolved_collection)
+  if(resolved_collection) 
     return (
-    <ol className={"track-list "+(indexed ? "" : "no-index")}>
-      {tracks_obj.items.map((item, index)=> <Track 
+    <ol className="track-list">
+      {resolved_collection.items.map((item, index)=> <Track 
           key={index}
           image={item.track.album.images[item.track.album.images.length-1].url}
           name={item.track.name}
           artists={item.track.artists}
           id={item.track.id}
+          duration={item.track.duration_ms/1000}
+          album={item.track.album.name}
           />
         )}
     </ol>
@@ -67,13 +70,21 @@ export default TrackList;
 
 
 const Track = ({name, artists, id, image, album, duration}) => { 
-  const clickArtistHandler = (event, id) =>{
+  const clickArtistHandler = (event, artist_id) =>{
     event.stopPropagation();
-    console.log("artist: "+id)
+    console.log("artist: "+artist_id)
   }
+
+  const clickPlayHandler = (event) =>{
+    event.stopPropagation();
+    console.log("play track: "+id)
+  }
+
   return (
     <li>
-      <button className="play-button">
+      <button 
+        className="play-button"
+        onClick={clickPlayHandler}>
         <FontAwesomeIcon icon={faPlay} />
       </button>
       <div className="before-title">

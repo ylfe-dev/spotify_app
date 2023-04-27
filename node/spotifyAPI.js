@@ -3,6 +3,7 @@ import request from './request.js';
 
 
 export const spotifyGET = (req, res, path) => {
+  console.log("params: "+JSON.stringify(req.params))
   getToken(req.session.user)
   .then(
     token => spotifyAPI(path, token)
@@ -18,7 +19,7 @@ export const spotifyGET = (req, res, path) => {
 export const spotifyAPI = (path, token) => {
   console.log("Request API /"+path)
   const promise = request(APIheader(path, token))
-    .then( data => JSON.parse(data), err => err );
+    .then( data => JSON.parse(data) );
 
   return promise;
 

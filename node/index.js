@@ -49,6 +49,7 @@ app.get('/api/user/top/artists', userController.getUserTopArtists);
 app.get('/api/user/top/tracks', userController.getUserTopTracks);
 app.get('/api/user/saved', userController.getUserSaved);
 app.get('/api/user/albums', userController.getUserAlbums);
+app.get('/api/user/artists', userController.getUserArtists);
 app.get('/api/user/playlists', userController.getUserPlaylists);
 
 

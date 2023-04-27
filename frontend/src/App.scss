@@ -90,3 +90,40 @@
   from { transform: scale(0); opacity:0 }
   to   { transform: scale(1); opacity:1 }
 }
+
+
+.horizontal-scroller {
+	overflow-x: auto;
+	&::-webkit-scrollbar {
+  	width: 7px;
+  	height: 7px;
+	}
+	&::-webkit-scrollbar-track {
+	  background: rgba(255, 255, 255, 0.2);
+	  border-radius:10px;
+	}
+	&::-webkit-scrollbar-thumb {
+	  background-color: rgba(255, 255, 255, 0.5);
+	  border-radius: 20px;
+
+	  border: transparent;
+	}
+}
+
+.scroller {
+	overflow-y: auto;
+	&::-webkit-scrollbar {
+  	width: 7px;
+  	height: 7px;
+	}
+	&::-webkit-scrollbar-track {
+	  background: rgba(255, 255, 255, 0.2);
+	  border-radius:10px;
+	}
+	&::-webkit-scrollbar-thumb {
+	  background-color: rgba(255, 255, 255, 0.5);
+	  border-radius: 20px;
+
+	  border: transparent;
+	}
+}

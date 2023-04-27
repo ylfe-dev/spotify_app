@@ -1,0 +1,44 @@
+.artist-scroller{
+	overflow-x:auto;
+}
+.artist-list{
+	padding:0;
+	margin:0;
+	text-align: center;
+	display: block;
+	min-width: max-content;
+	li{
+		margin: 0 0.5rem 0.5rem 0.5rem;
+		float: left;
+		display: inline-block;
+		width: 4rem;
+		overflow: hidden;
+		button{
+			background-color: unset;
+			border:none;
+			padding:0;
+			color:white;
+			.artist-image {
+				transition:transform 0.3s;
+				width:4rem !important;
+				margin-bottom: 0.5rem;
+			}
+			h5{
+				margin: 0;
+				display: -webkit-box;
+			    -webkit-line-clamp: 2;
+			    -webkit-box-orient: vertical;
+			    
+			}
+			&:hover{
+				cursor: pointer;
+				.artist-image{
+					transform: scale(0.8);
+				}
+			}
+		}
+		&::marker {
+			content:"";
+		}
+	}
+}

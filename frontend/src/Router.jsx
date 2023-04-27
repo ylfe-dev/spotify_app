@@ -9,7 +9,7 @@ import Background from './components/Background'
 
   
 const Router = () => {
-
+  const app = <App />;
   const router = createBrowserRouter([
   {
       path: "/",
@@ -17,22 +17,12 @@ const Router = () => {
       errorPage: <ErrorPage/>,
       children:
       [
-        {
-          path: "/",
-          element: <App />
-        },
-        {
-          path: "/album/:album",
-          element: <App />
-        },
-        {
-          path: "/artist/:artist/:album?",
-          element: <App />
-        },
-        {
-          path: "/oauth",
-          element: <OAuth/>
-        }
+        { element: app, path: "/" },
+        { element: app, path: "/album/:album" },
+        { element: app, path: "/playlist/:playlist" },
+        { element: app, path: "/artist/:artist/:album?" },
+
+        { element: <OAuth/>, path: "/oauth", }
       ]
     }
   ]);

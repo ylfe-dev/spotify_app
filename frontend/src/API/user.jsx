@@ -6,6 +6,7 @@ const userAPI = {
   topArtists: () => apiFetcher("user/top/artists"),
   saved: () => apiFetcher("user/saved", 3000),
   albums: () => apiFetcher("user/albums"),
+  artists: () => apiFetcher("user/artists"),
   playlists: () => apiFetcher("user/playlists")
 }
 
