@@ -2,20 +2,20 @@ import cloneDeep from 'lodash.clonedeep';
 const apiCache = new Map();
 
 
-export default async function apiFetcher(path, cache_time=false) {
+export default async function apiFetcher(path, cache_time=false, json=true) {
 	console.log("run apiFetcher("+path+")")
 	if( !apiCache.has(path) || (apiCache.get(path).expires - Date.now()) <= 0 ){
 		const promise = fetch(window.location.origin+"/api/"+path)
 			.then(res => {
 				console.log("Fetch status("+path+"): "+ res.status)
 				if(res.ok) 
-					return res.json()
+					return json ? res.json() : res
 				else 
 					throw res.status; 
 			})
-			.catch(error=>{
+			.catch(error => {
 				console.error("Fetch error: "+error);
-				if(error==401) return null;
+				if(error!=500) return null;
 				return new Promise((resolve) => 
 			    setTimeout(()=>{
 			    	console.log("Retrying...");

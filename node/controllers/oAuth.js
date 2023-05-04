@@ -6,7 +6,7 @@ import { spotifyAPI } from "../spotifyAPI.js";
 export const probeSession = (req, res) => {
 	getToken( req.session.user )
   .then(
-		token => spotifyAPI("me", token)
+		token => spotifyAPI("me", token, "GET", true)
               .then(
                 user => res.json({user: user}), 
                 error => res.sendStatus(error)
@@ -30,7 +30,7 @@ export const closeAuthCodeFlow = (req, res) => {
   if (code && state && state === req.session.oath_state) {
     exchangeCodeForToken(code)
     .then(token => {
-      spotifyAPI("me", token.access_token)
+      spotifyAPI("me", token.access_token, "GET", true)
       .then(user => {
         RedisClient().then(db => db.hSet(
         'user:'+user.email,  {

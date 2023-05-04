@@ -18,7 +18,6 @@ export const  PlaylistList = ({playlists, image=false}) => {
 
   const playlists_obj = playlists.read();
 
-  console.log(playlists_obj)
   if(playlists_obj) 
     return (
       <div className="playlists-scroller scroller">
@@ -47,7 +46,6 @@ const Playlist = ({name, id, image, tracks}) => {
 
   const clickHandler = (event) =>{
     event.stopPropagation();
-    console.log("go playlist")
     navigate("/playlist/"+id)
   }
 

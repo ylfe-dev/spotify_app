@@ -52,6 +52,13 @@ app.get('/api/user/albums', userController.getUserAlbums);
 app.get('/api/user/artists', userController.getUserArtists);
 app.get('/api/user/playlists', userController.getUserPlaylists);
 
+app.get('/api/user/player', userController.getUserPlayer);
+app.get('/api/user/player/next', userController.setUserPlayerNext);
+app.get('/api/user/player/prev', userController.setUserPlayerPrev);
+app.get('/api/user/player/pause', userController.setUserPlayerPause);
+app.get('/api/user/player/start', userController.setUserPlayerPlay);
+app.get('/api/user/player/play/:context/:id', userController.setUserPlayerTrack);
+
 
 app.get('/api/album/:id', contentController.getAlbum);
 app.get('/api/playlist/:id', contentController.getPlaylist);

@@ -5,7 +5,7 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 import Router from "./Router";
-import ContextProvider from "./ContextProvider";
+import {AuthProvider, ThemeProvider} from "./ContextProvider";
 
 
 
@@ -13,9 +13,11 @@ import ContextProvider from "./ContextProvider";
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
  
-    <ContextProvider>
-      <Router />
-    </ContextProvider>
+    <AuthProvider>
+      <ThemeProvider>
+        <Router />
+      </ThemeProvider>
+   </AuthProvider>
 
 );
 

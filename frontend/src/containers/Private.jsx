@@ -20,7 +20,6 @@ const Private = () => {
     <main className="app-private">
       <Me />
       <Content />
-      <About />
     </main>
   );
 }

@@ -8,37 +8,30 @@
 	box-sizing: border-box;
 
 	grid-gap: 1rem;
-	grid-template-rows: auto 1fr auto;
+	grid-template-rows: auto 1fr;
 	grid-template-columns: 1fr;
 	padding: 1rem 1rem;
 	
 
 	@media only screen and (min-width: $screen-s) {
 	    grid-gap: 1.5rem;
-	    grid-template-rows: auto 1fr;
-		grid-template-columns: 1.3fr  1fr;
+	    grid-template-rows: 1fr;
+		grid-template-columns: 300px  1fr;
 		padding:1rem 1.5rem;
-		.app-me{
-			grid-column: span 2;
-		}
+		.app-me{ grid-column: 1}
+		.app-content { grid-column: 2}
 	}
 	@media only screen and (min-width: $screen-m) {
 	    grid-gap: 2rem;
-	    grid-template-rows: 1fr;
-		grid-template-columns: 1fr 2fr 1.5fr;
 		padding:2rem 2rem;
-		.app-me{
-			grid-column: span 1;
-		}
+		
 	}
 	@media only screen and (min-width: $screen-l) {
 	    grid-gap: 3rem;
-		grid-template-columns: 1fr 2fr 1.5fr;
 		padding:2rem 3rem;
 	}
 	@media only screen and (min-width: $screen-xl) {
 	    grid-gap: 4rem;
-		grid-template-columns: 1fr 2fr 1.5fr;
 		padding:2rem 4rem;
 	}
 }

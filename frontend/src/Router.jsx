@@ -9,22 +9,17 @@ import Background from './components/Background'
 
   
 const Router = () => {
-  const app = <App />;
+  console.log("router rerender")
+  const app = <><Background/><App /></>;
   const router = createBrowserRouter([
-  {
-      path: "/",
-      element: <Background />,
-      errorPage: <ErrorPage/>,
-      children:
-      [
-        { element: app, path: "/" },
-        { element: app, path: "/album/:album" },
-        { element: app, path: "/playlist/:playlist" },
-        { element: app, path: "/artist/:artist/:album?" },
+  
+    { element: app, path: "/", errorPage: <ErrorPage/>, },
+    { element: app, path: "/album/:album" },
+    { element: app, path: "/playlist/:playlist" },
+    { element: app, path: "/artist/:artist/:album?" },
 
-        { element: <OAuth/>, path: "/oauth", }
-      ]
-    }
+    { element: <><Background/><OAuth/></>, path: "/oauth"}
+     
   ]);
 
   return (

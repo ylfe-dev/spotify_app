@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import "./SquareImage.scss";
 import { suspensePromise } from '../utils'
 
-const SquareImage = ({src, className, radius=0, size="auto"}) => {
+const SquareImage = ({src, className="", radius=0, size="auto"}) => {
 
   if(src){
     const src_promise = suspensePromise(fetch(src).then(res=>res.blob()).then(blob=>URL.createObjectURL(blob)))

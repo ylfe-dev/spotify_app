@@ -14,14 +14,15 @@ import { AuthContext } from "../ContextProvider";
 import oauthAPI from '../API/oauth'
 
 const Public = () => {
-  const session_probe = suspensePromise(oauthAPI.probe());
+  console.log("Public rerender")
+  const session_fetch = suspensePromise(oauthAPI.probe());
   const { user } = useContext(AuthContext);
 
   if(!user)
     return (
       <main className="app-public">
         <Suspense fallback={<Spinner/>}>
-          <Login session_probe={session_probe}/>
+          <Login fetcher={session_fetch}/>
         </Suspense>
       </main>
     )
@@ -33,8 +34,8 @@ export default Public;
 
 
 
-const Login = ({session_probe}) => {
-  const session = session_probe.read();
+const Login = ({fetcher}) => {
+  const session = fetcher.read();
   const { setUser } = useContext(AuthContext);
 
 

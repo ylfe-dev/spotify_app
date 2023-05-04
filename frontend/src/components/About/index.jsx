@@ -14,10 +14,11 @@ import user  from '../../API/user'
 
 const  About = () => {
 
+
   return (
     <section className="app-about app-container">
      
-        <h3> About</h3>
+       
       
     </section>
   );

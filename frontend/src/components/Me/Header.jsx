@@ -13,7 +13,7 @@ import oauthAPI from "../../API/oauth"
 const  Header = () => {
   
   const { user } = useContext(AuthContext);
-
+  console.log("Header rerender")
   return (
    <header className="user-header">
     <h5 className="user-name">{user.display_name || "Me"}</h5>

@@ -1,30 +1,34 @@
 import './Background.scss';
-import { useState, useEffect, useContext } from 'react'
-import { Outlet } from "react-router-dom";
+import { useState, useEffect, useContext, useMemo } from 'react'
 import { ThemeContext } from "../ContextProvider";
 
 const Background = () => {
   const { theme } = useContext(ThemeContext)
-  const [leyer, setLeyer] = useState(false)
-  const [image, setImage] = useState(basic_background)
+  const [layer, setLayer] = useState(false)
+  const [image, setImage] = useState({under: basic_background, over: null})
 
   useEffect(()=>{
-    /*
-    fetch("https://i.scdn.co/image/ab67706f000000030e468f56062f74309b22d63d")
-    .then(data => data.blob())
-    .then(blob => URL.createObjectURL(blob))
-    .then(url => setImage(url))
-  */
-  },[])
+    if(theme && theme.image)
+      fetch(theme.image)
+      .then(data => data.blob())
+      .then(blob => URL.createObjectURL(blob))
+      .then(url => changeBackground(url))
+  },[theme])
 
+  const changeBackground = url =>{
+    const new_layer = layer ? {under: url} : {over: url};
+    setImage({...image, ...new_layer});
+    setLayer(!layer);
+  }
+
+ console.log("background rerender")
 
   return (
     <>
       <div id="app-background">
-        <div style={{opacity: !leyer, backgroundImage: "url("+image+")"}}></div>
-        <div style={{opacity: leyer}}></div>
+        <div style={{ backgroundImage: "url("+image.under+")" }}></div>
+        <div style={{ opacity: layer ? 1 : 0, backgroundImage: "url("+image.over+")" }}></div>
       </div>
-      <Outlet/>
     </>
   );
 }

@@ -1,5 +1,5 @@
 import { getToken } from "../Token.js"
-import { spotifyGET } from "../spotifyAPI.js"
+import { spotifyGET, spotifyPUT, spotifyPOST } from "../spotifyAPI.js"
 
 export const getUser = (req, res) => spotifyGET(req, res, "me")
 
@@ -14,3 +14,26 @@ export const getUserArtists = (req, res) => spotifyGET(req, res, "me/following?t
 export const getUserPlaylists = (req, res) => spotifyGET(req, res, "me/playlists")
 
 export const getUserAlbums = (req, res) => spotifyGET(req, res, "me/albums")
+
+
+export const getUserPlayer = (req, res) => spotifyGET(req, res, "me/player")
+
+export const setUserPlayerPlay = (req, res) => spotifyPUT(req, res, "me/player/play")
+
+export const setUserPlayerPause = (req, res) => spotifyPUT(req, res, "me/player/pause")
+
+export const setUserPlayerNext = (req, res) => spotifyPOST(req, res, "me/player/next")
+
+export const setUserPlayerPrev = (req, res) => spotifyPOST(req, res, "me/player/previous")
+
+export const setUserPlayerTrack = (req, res) => spotifyPUT(req, res, "me/player/play", PlayTrackJSON(req)) 
+
+const PlayTrackJSON = (req) =>{
+	const json= JSON.stringify({
+		context_uri: req.params.context,
+		offset: { uri: "spotify:track:"+req.params.id },
+		position_ms: 0
+	})
+	console.log(json)
+	return json;
+}

@@ -15,7 +15,7 @@ import user  from '../API/user'
 
 
 
-export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popularity, duration}) => {
+export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popularity, duration, context=false}) => {
 
   const tracks_obj = tracks.read();
   if(tracks_obj) 
@@ -26,13 +26,15 @@ export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popul
             if( index < limit) 
               return <Track 
                 key={index}
+                className="no-details"
                 name={item.track.name}
                 artists={item.track.artists} 
                 id={item.track.id} 
                 image={image ? item.track.album.images[item.track.album.images.length-1].url : false}
                 album={album ? item.track.album.name: false}
                 popularity={popularity? item.track.popularity : false}
-                duration={duration ? item.track.duration_ms/1000 : false}/>
+                duration={duration ? item.track.duration_ms/1000 : false}
+                context={context}/>
           })}
         </ol>
       </div>
@@ -44,50 +46,53 @@ export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popul
 
 
 
-export const  TrackList = ({collection}) => {
-  const resolved_collection = collection.read().tracks;
-  console.log(resolved_collection)
-  if(resolved_collection) 
+export const  TrackList = ({tracks, context=false}) => {
+
     return (
-    <ol className="track-list">
-      {resolved_collection.items.map((item, index)=> <Track 
+    <ol  type="1" className="track-list">
+      {tracks.map((item, index)=> <Track 
           key={index}
+          ordnum={index+1}
           image={item.track.album.images[item.track.album.images.length-1].url}
           name={item.track.name}
           artists={item.track.artists}
           id={item.track.id}
           duration={item.track.duration_ms/1000}
-          album={item.track.album.name}
+          album={item.track.album}
+          context={context}
           />
         )}
     </ol>
   )
-  else return null;
 }
 
 export default TrackList;
 
 
 
-const Track = ({name, artists, id, image, album, duration}) => { 
+const Track = ({className, name, artists, id, image, album, duration, ordnum, context=false}) => { 
   const clickArtistHandler = (event, artist_id) =>{
-    event.stopPropagation();
     console.log("artist: "+artist_id)
   }
 
   const clickPlayHandler = (event) =>{
-    event.stopPropagation();
-    console.log("play track: "+id)
+    console.log("context: "+context+", id: "+id)
+    user.playerPlay(context, id);
+  }
+
+   const clickAlbumHandler = (event) =>{
+    console.log("album: "+album.id)
   }
 
   return (
-    <li>
+    <li className={className}>
       <button 
         className="play-button"
         onClick={clickPlayHandler}>
         <FontAwesomeIcon icon={faPlay} />
       </button>
       <div className="before-title">
+        {ordnum ? <p className="order-number">{ordnum}</p> : null}
         {image ? <SquareImage className="track-image" radius="10px" src={image} /> : null}
       </div>
       <div className="track-title">
@@ -103,20 +108,21 @@ const Track = ({name, artists, id, image, album, duration}) => {
         </p>
       </div>
       <div className="after-title">
-        {album ? <p className="track-album">{album}</p> : null}
-        {duration ? <p className="track-count">{countUnits(duration)}</p> : null}
+        {album ? <button onClick={clickAlbumHandler} className="track-album">{album.name}</button> : null}
+        {duration ? <p className="track-duration">{countTime(duration)}</p> : null}
       </div>
     </li>
   )
 }
 
-const countUnits = count =>{
-  const units = ["", "k", "m", "g"];
-  let exp = 0;
-  let n = count;
-  while(n>1000){
-    n /= 1000;
-    exp++;
-  }
-  return n+units[exp];
+const countTime = s => {
+
+  const minutes = Math.floor(s/60);
+  const seconds = Math.floor(s - minutes*60);
+
+  let time_string = minutes;
+  time_string +=   minutes < 10 ? ":" + (seconds < 10 ? "0" + seconds : seconds) : ""; 
+  time_string += " min"
+
+  return time_string;
 }

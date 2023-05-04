@@ -79,7 +79,7 @@ const Artist = ({name, id, image}) => {
   return (
     <li>
       <button onClick={clickHandler}>
-        <SquareImage className="artist-image" radius="10px" src={image} />
+        <SquareImage className="artist-image" radius="100px" src={image} />
         <div className="artist-title">
           <h5 className="artist-name">{name}</h5>
   
