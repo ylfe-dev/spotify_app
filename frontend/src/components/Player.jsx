@@ -20,7 +20,7 @@ const Player = ({className}) =>{
 
 
 	return (
-		<section className={"player "+className}>
+		<section className={"app-player "+className}>
 			<Suspense fallback={"loading..."}>
 				<ComposedPlayer fetcher={player_fetch} />
 			</Suspense>
@@ -64,7 +64,7 @@ const ComposedPlayer = ({fetcher}) => {
 	const tranck_info = useMemo(
 		() => <PlayerTrackInfo 
 			name={player.item.name}
-			image={player.item.album.images[player.item.album.images.length-1].url}
+			image={player.item.album.images[0].url}
 			artists={player.item.artists} />,
 		[player.item.id])
 

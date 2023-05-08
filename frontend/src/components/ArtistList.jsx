@@ -38,7 +38,7 @@ export const  ArtistList = ({artists, limit=99}) => {
 }
 
 
-export const  TopArtistList = ({artists, limit=99}) => {
+export const  TopArtistList = ({artists, limit=99, className}) => {
   const artists_obj = artists.read();
   const scroller = useRef();
   const wheelHandler = (ev) => scroller.current.scrollLeft += ev.deltaY;
@@ -46,7 +46,7 @@ export const  TopArtistList = ({artists, limit=99}) => {
 
   if(artists_obj) 
     return (
-      <div ref={scroller} onWheel={wheelHandler} className="artist-scroller scroller">
+      <div ref={scroller} onWheel={wheelHandler} className={"artist-scroller scroller "+className}>
         <ul className="artist-list">
           {artists_obj.items.map((item, index)=> {
             if( index < limit) 

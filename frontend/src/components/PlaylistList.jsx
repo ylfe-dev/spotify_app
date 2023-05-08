@@ -14,13 +14,13 @@ import user  from '../API/user'
 
 
 
-export const  PlaylistList = ({playlists, image=false}) => {
+export const  PlaylistList = ({playlists, image=false, className}) => {
 
   const playlists_obj = playlists.read();
 
   if(playlists_obj) 
     return (
-      <div className="playlists-scroller scroller">
+      <div className={"playlists-scroller scroller "+className}>
         <ol className="playlists-list">
           {playlists_obj.items.map((item, index)=> 
              <Playlist 

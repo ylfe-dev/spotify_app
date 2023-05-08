@@ -4,17 +4,18 @@ import Header from "./Header"
 import Saved from "./Saved"
 import Artists from "./Artists"
 import Playlists from "./Playlists"
-import Player  from '../Player'
+import Accordion from "../Accordion"
 
 const  Me = () => {
 
   return (
     <section className="app-me">
       <Header className="app-tile"/>
-      <Player className="app-tile"/>
-      <Saved className="app-tile"/>
-      <Playlists className="app-tile"/>
-      <Artists className="app-tile"/>
+      <Accordion>
+        <Saved  accordion-id="0" className="app-tile accordion-item active"/>
+        <Playlists accordion-id="1" className="app-tile accordion-item"/>
+        <Artists accordion-id="2" className="app-tile accordion-item"/>
+      </Accordion>
     </section>
   );
 }

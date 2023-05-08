@@ -35,7 +35,7 @@ const PlaylistHeader = ({fetcher, className}) => {
 
 	return playlist ? (
 		<header className={className}>
-			{playlist.images ? <SquareImage className="playlist-image" size={200} radius={10} src={playlist.images[0].url}/> : null}
+			{playlist.images[0] ? <SquareImage className="playlist-image" size={180} radius={10} src={playlist.images[0].url}/> : null}
 			
 			<div className="playlist-title">
 				<h1>{playlist.name}</h1>

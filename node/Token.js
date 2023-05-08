@@ -39,8 +39,10 @@ export const getToken = (user) => {
 
 const validateUserToken = user => {
 	return new Promise((resolve, reject) => {
-		if(user && user.token && user.token_expires > Date.now())
+		if(user && user.token && user.token_expires > Date.now()){
+			console.log("token is fresh... now:" + Date.now())
 			resolve(user.token);
+		}
 		else if(user && user.refresh_token){
 			console.log("refreshing token... now:" + Date.now())
 			exchangeRefreshTokenForToken(user.refresh_token)

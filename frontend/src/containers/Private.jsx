@@ -10,7 +10,7 @@ import {suspensePromise, wait} from '../utils'
 import Me from "../components/Me"
 import Content from "../components/Content"
 import About from "../components/About"
-
+import Player  from '../components/Player'
 
 
 const Private = () => {
@@ -19,6 +19,7 @@ const Private = () => {
   return (
     <main className="app-private">
       <Me />
+      <Player className="app-tile"/>
       <Content />
     </main>
   );

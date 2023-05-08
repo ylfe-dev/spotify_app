@@ -4,7 +4,7 @@
 	display:grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
-	h3 {
-		margin: 0 0 0.5rem 0;
-	}
+	&.active h3 { margin: 0 0 0.5rem 0 }
+	h3 { margin: 0 }
+
 }

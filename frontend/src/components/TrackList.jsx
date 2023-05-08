@@ -15,12 +15,12 @@ import user  from '../API/user'
 
 
 
-export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popularity, duration, context=false}) => {
+export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popularity, duration, context=false, className}) => {
 
   const tracks_obj = tracks.read();
   if(tracks_obj) 
     return (
-      <div className="track-scroller scroller">
+      <div className={"track-scroller scroller " + className}>
         <ol className={"track-list "+(indexed ? "" : "no-index")}>
           {tracks_obj.items.map((item, index)=> {
             if( index < limit) 
