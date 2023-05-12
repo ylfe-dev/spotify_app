@@ -47,8 +47,10 @@ export const spotifyAPI = (path, token, method, json=false, data=false) => {
   return new Promise((resolve, reject) => {
     const options = data ? APIheaderData(path, token, method, data) : APIheader(path, token, method);
     request(options, data)
-    .then( data => json ? JSON.parse(data) : resolve(data), err => reject(err) )
-    .then( json => resolve(json), err => reject(500) )
+    .then( 
+      data => json ?  JSON.parse(data) : resolve(data),
+      err => reject(err))
+    .then( json => resolve(json), err => {console.error(err); reject(204)} )
   })
    
 

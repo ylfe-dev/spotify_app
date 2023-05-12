@@ -46,7 +46,7 @@ const Login = ({fetcher}) => {
  
   if(session && session.oauth_link)
     return (
-      <div className="app-container scale-in">
+      <div className="app-tile scale-in">
         <FontAwesomeIcon icon={faUser} />
         <h2>Let's explore music!</h2>
         <a href={session.oauth_link} className="app-login-button mt-2">

@@ -1,4 +1,4 @@
-import { exchangeCodeForToken, oAuthURL, getToken } from "../Token.js"
+import { exchangeCodeForToken, oAuthURL, getToken, clearToken } from "../Token.js"
 import { getUser }  from './user.js';
 import { RedisClient } from '../redis_db.js'
 import { spotifyAPI } from "../spotifyAPI.js";
@@ -7,10 +7,16 @@ export const probeSession = (req, res) => {
 	getToken( req.session.user )
   .then(
 		token => spotifyAPI("me", token, "GET", true)
-              .then(
-                user => res.json({user: user}), 
-                error => res.sendStatus(error)
-              ),
+      .then(
+        user => res.json({user: user}), 
+        error => {
+          console.error(error);
+          clearToken(req.session.user);
+          const [link, state] = oAuthURL();
+          req.session.oath_state = state;
+          res.json({user:false, oauth_link:link});
+        }
+      ),
 		no_token => {
 	    const [link, state] = oAuthURL()
 	    req.session.oath_state = state; //no PCKE s256

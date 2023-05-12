@@ -9,6 +9,6 @@ export const getPlaylist = (req, res) => spotifyGET(req, res, "playlists/"+encod
 
 export const getArtist = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id))
 
-export const getArtistTop = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id)+"/top-tracks")
+export const getArtistTop = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id)+"/top-tracks?market="+encodeURI(req.params.country))
 
 export const getArtistAlbums = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id)+"/albums")

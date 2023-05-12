@@ -1,16 +1,17 @@
 import './TrackList.scss';
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useContext, useMemo } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom";
 
 import Spinner from './Spinner'
 import SquareImage from './SquareImage'
 
 import { suspensePromise, wait } from '../utils'
-import { AuthContext } from "../ContextProvider";
 
-import user  from '../API/user'
+import {  PlayerContext } from "../ContextProvider"
+
 
 
 
@@ -45,6 +46,27 @@ export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popul
 
 
 
+export const  TracksList = ({tracks, context=false}) => {
+ 
+    return (
+    <ol  type="1" className="track-list">
+      {tracks.map((item, index)=> <Track 
+          key={index}
+          ordnum={index+1}
+          image={item.album.images[item.album.images.length-1].url}
+          name={item.name}
+          artists={item.artists}
+          id={item.id}
+          duration={item.duration_ms/1000}
+          album={item.album}
+          context={context? context : item.album.uri}
+          />
+        )}
+    </ol>
+  )
+}
+
+
 
 export const  TrackList = ({tracks, context=false}) => {
 
@@ -71,20 +93,15 @@ export default TrackList;
 
 
 const Track = ({className, name, artists, id, image, album, duration, ordnum, context=false}) => { 
-  const clickArtistHandler = (event, artist_id) =>{
-    console.log("artist: "+artist_id)
-  }
+  const {playerActions}  = useContext(PlayerContext)
+  const navigate = useNavigate();
 
-  const clickPlayHandler = (event) =>{
-    console.log("context: "+context+", id: "+id)
-    user.playerPlay(context, id);
-  }
+  const clickArtistHandler = (event, artist_id) => navigate("/artist/"+artist_id)
+  const clickPlayHandler = (event) => playerActions.play(context, id);
+  const clickAlbumHandler = (event) => navigate("/album/"+album.id)
+  
 
-   const clickAlbumHandler = (event) =>{
-    console.log("album: "+album.id)
-  }
-
-  return (
+  const memoTrack = useMemo(() => (
     <li className={className}>
       <button 
         className="play-button"
@@ -112,7 +129,9 @@ const Track = ({className, name, artists, id, image, album, duration, ordnum, co
         {duration ? <p className="track-duration">{countTime(duration)}</p> : null}
       </div>
     </li>
-  )
+  ),[className, name, artists, id, image, album, duration, ordnum, context])
+
+  return memoTrack
 }
 
 const countTime = s => {

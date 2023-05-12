@@ -20,8 +20,17 @@
 		}
 		h5{
 			font-weight: normal;
-			span{
+			button{
+				background-color: unset;
+				border: none;
+				color:white;
+				margin:0;
+				padding:0;
 				margin-right: 0.7rem;
+				&:hover{
+					text-decoration: underline;
+					cursor: pointer;
+				}
 			}
 		}
 	}

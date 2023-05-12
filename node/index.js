@@ -63,7 +63,7 @@ app.get('/api/user/player/play/:context/:id', userController.setUserPlayerTrack)
 app.get('/api/album/:id', contentController.getAlbum);
 app.get('/api/playlist/:id', contentController.getPlaylist);
 app.get('/api/artist/:id', contentController.getArtist);
-app.get('/api/artist/:id/top', contentController.getArtistTop);
+app.get('/api/artist/:id/top/:country', contentController.getArtistTop);
 app.get('/api/artist/:id/albums', contentController.getArtistAlbums);
 
 

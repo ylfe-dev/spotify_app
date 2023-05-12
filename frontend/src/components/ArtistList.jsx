@@ -3,6 +3,7 @@ import './ArtistList.scss';
 import { Suspense, useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom";
 
 import Spinner from './Spinner'
 import SquareImage from './SquareImage'
@@ -69,13 +70,10 @@ export const  TopArtistList = ({artists, limit=99, className}) => {
 
 
 const Artist = ({name, id, image}) => { 
+  const navigate = useNavigate();
 
-
-  const clickHandler = (event) =>{
-    event.stopPropagation();
-    console.log("go artist: "+id)
-  }
-
+  const clickHandler = () =>  navigate("/artist/"+id)
+  
   return (
     <li>
       <button onClick={clickHandler}>
@@ -89,13 +87,3 @@ const Artist = ({name, id, image}) => {
   )
 }
 
-const countUnits = count =>{ console.log(count)
-  const units = ["", "k", "m", "g"];
-  let exp = 0;
-  let n = count;
-  while(n>1000){
-    n /= 1000;
-    exp++;
-  }
-  return n+units[exp];
-}

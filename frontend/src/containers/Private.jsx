@@ -4,6 +4,7 @@ import { Suspense, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 
+import { PlayerProvider } from "../ContextProvider"
 import Spinner from '../components/Spinner'
 import {suspensePromise, wait} from '../utils'
 
@@ -18,9 +19,11 @@ const Private = () => {
 
   return (
     <main className="app-private">
-      <Me />
-      <Player className="app-tile"/>
-      <Content />
+      <PlayerProvider>
+        <Me />
+        <Player className="app-tile"/>
+        <Content />
+      </PlayerProvider>
     </main>
   );
 }

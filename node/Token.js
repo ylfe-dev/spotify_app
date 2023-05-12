@@ -28,14 +28,15 @@ const accountsAPI = (data) => {
 		
 
 
-export const getToken = (user) => {
+export const getToken = (user, force_new = false) => {
 	if(user)
 		return RedisClient()
 			.then(db=>db.hGetAll('user:'+user))
 			.then(data=>validateUserToken(data));
 	else
-		return new Promise((resolve,reject)=>rej("No user session"))
+		return new Promise((resolve,reject) => reject("No user session"))
 }
+
 
 const validateUserToken = user => {
 	return new Promise((resolve, reject) => {
@@ -49,16 +50,16 @@ const validateUserToken = user => {
 			.then( 
 				fresh_token =>  updateToken(user, fresh_token)
 												.then(() => resolve(fresh_token.access_token)),
-				error 			=>  cancelToken(user)
+				error 			=>  clearToken(user.mail)
 												.then(() => reject(error)) 
 			)
 		}else reject("oAuth required");
 	})
-
 }
 
 
 const updateToken = (user, new_token) => {
+	console.log("new token expire time: " + new_token.expires_in+"s, now(): "+Date.now())
 	return RedisClient().then(db => db.hSet(
 	'user:'+user.mail, {
 		token:new_token.access_token,
@@ -69,8 +70,8 @@ const updateToken = (user, new_token) => {
 
 
 
-const cancelToken = user => RedisClient().then(db => db.hDel(
-	'user:'+user.mail, ["token","token_expires", "refresh_token"]))
+export const clearToken = mail => RedisClient().then(db => db.hDel(
+	'user:'+mail, ["token","token_expires", "refresh_token"]))
 
 
 export const oAuthURL = () => { // PKCE!

@@ -20,7 +20,7 @@ function OAuth() {
     const oauth_response = suspensePromise(oauthAPI.auth(oauth_query));
     return (
       <main className="app-oauth">
-        <div className="app-container">
+        <div className="app-tile">
           <Suspense fallback={<><Spinner/><h2>Logowanie</h2></>}>
             <Alert auth={oauth_response}/>
           </Suspense>

@@ -16,7 +16,7 @@ const Router = () => {
     { element: app, path: "/", errorPage: <ErrorPage/>, },
     { element: app, path: "/album/:album" },
     { element: app, path: "/playlist/:playlist" },
-    { element: app, path: "/artist/:artist/:album?" },
+    { element: app, path: "/artist/:artist" },
 
     { element: <><Background/><OAuth/></>, path: "/oauth"}
      
