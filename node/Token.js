@@ -4,7 +4,7 @@ import { wwwFormURL, randomString } from './utils.js'
 import client from './private/client.js'
 
 const client_auth = Buffer.from(client.id + ':' + client.secret).toString('base64');
-const app_auth_scopes = `user-read-private user-read-email user-top-read user-follow-read user-library-read user-read-playback-state user-modify-playback-state playlist-read-private`;
+const app_auth_scopes = `user-read-private user-read-email user-top-read user-follow-read user-library-read user-read-playback-state user-modify-playback-state playlist-read-private user-read-recently-played`;
 const oauth_uri = 'http://localhost:3001/oauth';
 
 

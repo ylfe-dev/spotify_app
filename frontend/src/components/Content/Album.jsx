@@ -1,52 +1,57 @@
-import './Playlist.scss'
+import './Album.scss'
 
 import { Suspense, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLock, faEye, faLockOpen, faMusic } from '@fortawesome/free-solid-svg-icons'
+import {  faRecordVinyl, faMusic, faCalendar } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom";
+
 import { suspensePromise } from '../../utils'
 
-import TrackList from '../TrackList'
+import {AlbumTrackList} from '../TrackList'
 import contentAPI  from '../../API/content'
-import { PlaylistList } from '../PlaylistList'
+
 import Spinner from '../Spinner'
 import SquareImage from '../SquareImage'
 
-const Artist = ({id}) =>{
-	const playlists_promise = suspensePromise(contentAPI.playlist(id));
-	console.log("Playlist rerender")
+const Album = ({id}) =>{
+	const album_promise = suspensePromise(contentAPI.album(id));
+	console.log("Album rerender")
 	return (
-		<div className="app-playlist">
+		<div className="app-album">
 			<Suspense fallback={<Spinner />}>
-				<PlaylistHeader fetcher={playlists_promise}/>
-				<PlaylistTracks fetcher={playlists_promise}/>
+				<AlbumHeader fetcher={album_promise}/>
+				<AlbumTracks fetcher={album_promise}/>
 			</Suspense>
 		</div>
 	)
 }
 
-export default Playlist;
+export default Album;
 
 
-const ArtistHeader = ({fetcher, className}) => {
-	const playlist = fetcher.read();
+const AlbumHeader = ({fetcher}) => {
+	const album = fetcher.read();
+	const navigate = useNavigate();
 
-	console.log("Playlist header rerender")
-
-
-	return playlist ? (
-		<header className={className}>
-			{playlist.images[0] ? <SquareImage className="playlist-image" size={180} radius={10} src={playlist.images[0].url}/> : null}
+	function clickArtistHandler (id) {
+		navigate("/artist/"+id)
+	}
+	return album ? (
+		<header>
+			{album.images[0] ? <SquareImage className="album-image" size={180} radius={10} src={album.images[0].url}/> : null}
 			
-			<div className="playlist-title">
-				<h1>{playlist.name}</h1>
-				<p className="playlist-owner">{playlist.owner.display_name}'s playlist</p>
-				{playlist.description ? <p className="playlist-description">{playlist.description}</p> : null}
+			<div className="album-title">
+				<h1>{album.name}</h1>
+				<p className="album-artists">
+					{album.artists.map(artist => <span onClick={()=>clickArtistHandler(artist.id)}>{artist.name}</span>)}
+				</p>
+				{album.description ? <p className="playlist-description">{album.description}</p> : null}
 			</div>
 			
-			<p className="playlist-details">
-				<span><FontAwesomeIcon icon={faEye} />{playlist.followers.total}</span>
-				<span><FontAwesomeIcon icon={playlist.public ? faLockOpen : faLock } />{playlist.public ? "public" : "private" }</span>
-				<span><FontAwesomeIcon icon={faMusic} />{playlist.tracks.total}</span>
+			<p className="album-details">
+				<span><FontAwesomeIcon icon={faRecordVinyl} />{album.album_type}</span>
+				<span><FontAwesomeIcon icon={faCalendar} />{album.release_date}</span>
+				<span><FontAwesomeIcon icon={faMusic} />{album.tracks.total}</span>
 			</p>
 
 
@@ -55,20 +60,24 @@ const ArtistHeader = ({fetcher, className}) => {
 }
 
 
-const ArtistTracks = ({fetcher})=>{
-	const playlist = fetcher.read();
+const AlbumTracks = ({fetcher})=>{
+	const album = fetcher.read();
+	console.log(album)
 	return (
-		<section className="playlist-tracklist app-tile">
+		<section className="album-tracklist app-tile">
 		<h3 className="tracklist-header">
 			<span style={{textAlign:"center"}}>#</span>
-			<span></span>
+
 			<span>title</span>
-			<span>album</span>
 			<span style={{textAlign:"center"}}>duration</span>
 		</h3>
 			<div className="scroller">
-				<TrackList tracks={playlist.tracks.items} context={playlist.uri}/>
+				<AlbumTrackList tracks={album.tracks.items} context={album.uri}/>
 			</div>
+		<p className="album-copyrights">
+			{album.copyrights.map(copyright => <span> {copyright.type == "C" ? "© ": "℗ " } {copyright.text}</span>)}
+		</p>
 		</section>
 	)
 }
+//

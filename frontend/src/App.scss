@@ -70,10 +70,14 @@
 }
 
 @keyframes scalein {
-  from { transform: scale(0); opacity:0 }
+  from { transform: scale(0.5); opacity:0 }
   to   { transform: scale(1); opacity:1 }
 }
 
+@keyframes slidein_top {
+  from { transform: translateY(-50px); opacity:0 }
+  to   { transform: translateY(0px); opacity:1 }
+}
 
 .horizontal-scroller {
 	overflow-x: auto;

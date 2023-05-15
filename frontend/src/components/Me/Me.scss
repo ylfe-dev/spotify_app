@@ -3,8 +3,9 @@
 .app-me {
 	display: grid;
 	grid-template-columns: 100%;
-	grid-template-rows: auto auto 1fr;
+	grid-template-rows: 56px auto;
 	grid-gap: 1rem;
+	align-items: baseline;
 	overflow: hidden;
 	@media only screen and (min-width: $screen-m) {
 	}

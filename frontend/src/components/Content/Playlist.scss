@@ -1,11 +1,20 @@
 .app-playlist {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto auto 1fr;
+	grid-template-rows: auto 1fr;
 	grid-gap:1rem;
+	align-items: baseline;
 	overflow: hidden;
 	height: 100%;
-	min-width:500px;
+	
+	.app-spinner{
+		grid-area: 1/1/3/2;
+		align-self: center;
+		justify-self:center ;
+		position: absolute;
+		top:0;
+		bottom:0;
+	}
 	header {
 		background-color: white;
 		color:black;
@@ -13,9 +22,10 @@
 		border-radius: 10px;
 		grid-template-columns: auto 1fr;
 		grid-template-rows: auto auto;
-		grid-gap: 1rem;
+		grid-column-gap: 1rem;
 		max-height: 180px;
 		overflow: hidden;
+		animation: scalein 1s;
 		.playlist-image{
 			grid-area: 1/1/3/2;
 		}
@@ -23,7 +33,14 @@
 			overflow: hidden;
 			padding: 1rem 1rem 0 1rem;
 			grid-area: 1/2/2/3;
-			h1 { margin: 0 }
+			h1 {
+				margin: 0;
+				display: -webkit-box;
+			    -webkit-line-clamp: 2;
+			    -webkit-box-orient: vertical;
+			    text-overflow: ellipsis;
+			    overflow: hidden;
+			}
 			.playlist-owner { 
 				margin: 0.5rem 0;
 				font-size:10pt;
@@ -32,6 +49,11 @@
 			.playlist-description{
 				margin: 0.5rem 0;
 				font-size:12pt;
+				display: -webkit-box;
+			    -webkit-line-clamp: 2;
+			    -webkit-box-orient: vertical;
+			    text-overflow: ellipsis;
+			    overflow: hidden;
 			}
 		}
 		.playlist-details{
@@ -39,7 +61,6 @@
 			grid-area: 2/2/3/3;
 			text-align: right;
 			align-self: end;
-			color:grey;
 			margin:0;
 			span {
 				margin:0 0.5rem;
@@ -51,11 +72,14 @@
 		}
 	}
 	.playlist-tracklist{
+		max-height: 100%;
+		box-sizing: border-box;
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-template-rows: auto 1fr;
 		overflow: hidden; 
 		padding: 1rem;
+			animation: slidein_top 1s;
 		.tracklist-header{
 			padding-right: 0.5rem;
 			margin:0.5rem 0 1.5rem 0;

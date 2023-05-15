@@ -2,8 +2,8 @@ import './Header.scss';
 
 import { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEye, faPowerOff } from '@fortawesome/free-solid-svg-icons'
-
+import { faEye, faPowerOff, faHome } from '@fortawesome/free-solid-svg-icons'
+import { useNavigate } from "react-router-dom";
 
 import SquareImage from '../SquareImage'
 import { AuthContext } from "../../ContextProvider";
@@ -23,7 +23,10 @@ const  Header = () => {
       radius="50%"
       src={user.images[0] || window.location.origin+"/assets/user.png"} /> 
     <div className="user-stats">
-      <LogoutButton /><span><FontAwesomeIcon icon={faEye} />{user.followers.total}</span>
+    <HomeButton/>
+      <LogoutButton />
+      <span><FontAwesomeIcon icon={faEye} />{user.followers.total}</span>
+      
     </div>
    </header> 
   );
@@ -39,8 +42,21 @@ const LogoutButton = ()=>{
     .then(()=>setUser(null))
   }
   return (
-    <button className="logout-button" onClick={clickHandler} >
+    <button className="logout-button button" onClick={clickHandler} >
       <FontAwesomeIcon icon={faPowerOff} />
+    </button>
+  )
+} 
+
+const HomeButton = ()=>{
+  const navigate = useNavigate()
+
+  function clickHandler() { 
+    navigate("/");
+  }
+  return (
+    <button className="home-button button" onClick={clickHandler} >
+      <FontAwesomeIcon icon={faHome} />
     </button>
   )
 } 

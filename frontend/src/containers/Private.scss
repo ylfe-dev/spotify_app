@@ -14,12 +14,17 @@
 
 	@media only screen and (min-width: $screen-s) {
 	    grid-column-gap: 2rem;
+	    grid-row-gap: 1rem;
 	    grid-template-rows: 1fr auto;
 		grid-template-columns: 300px  1fr;
 		padding:1rem 1.5rem;
 		.app-me{ grid-area: 1/1/2/2}
 		.app-content { grid-area: 1/2/3/3 }
-		.app-player { grid-area: 2/1/3/2}
+		.app-player-container { grid-area: 2/1/3/2}
+
+		.app-content{
+			min-width:500px;
+		}
 	}
 	@media only screen and (min-width: $screen-m) {
 		padding:2rem 2rem;
@@ -31,7 +36,7 @@
 
 		.app-me{ grid-area: 1/1/2/2}
 		.app-content { grid-area: 1/2/2/3 }
-		.app-player { grid-area: 1/3/2/4}
+		.app-player-container { grid-area: 1/3/2/4}
 		
 	}
 	@media only screen and (min-width: $screen-xl) {

@@ -12,7 +12,8 @@ import user  from '../../API/user'
 
 import Playlist from './Playlist'
 import Artist from './Artist'
-import Album from './Artist'
+import Album from './Album'
+import Home from './Home'
 
 const  Content = () => {
   const {artist, album, playlist} = useParams();
@@ -23,6 +24,7 @@ const  Content = () => {
         {playlist? <Playlist id={playlist}/> : null}
         {artist? <Artist id={artist}/> : null}
         {album? <Album id={album}/> : null}
+        {!(album || playlist || artist)? <Home /> : null}
         
     </section>
   );

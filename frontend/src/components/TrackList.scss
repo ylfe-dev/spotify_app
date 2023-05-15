@@ -143,5 +143,22 @@
 		}
 		
 	}
-	
+	&.album {
+		li {
+			grid-template-columns: auto 1fr auto;
+			.after-title{
+				min-width:5rem;
+				grid-template-columns: 1fr;
+			}
+		}
+	}
+	&.player {
+		li {
+			grid-template-columns: auto 1fr auto;
+			.after-title{
+				min-width:5rem;
+				grid-template-columns: 1fr;
+			}
+		}
+	}
 }

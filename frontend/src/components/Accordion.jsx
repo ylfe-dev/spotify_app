@@ -6,12 +6,19 @@ const  Accordion = ({ children}) => {
   const accordion = useRef(null);
 
   const setActive = id => {
-     accordion.current.querySelectorAll('.accordion-item').forEach(item =>{
-      if(item.getAttribute("accordion-id") == id)
+    let grid_rows = "";
+    const items = accordion.current.querySelectorAll('.accordion-item');
+     items.forEach(item =>{
+      if(item.getAttribute("accordion-id") == id){
         item.classList.add('active');
-      else
+        grid_rows +="1fr ";
+      }
+      else{
         item.classList.remove('active');
+        grid_rows +="auto ";
+      }
      })
+     accordion.current.style.gridTemplateRows = grid_rows;
   }
 
   useEffect(()=>{

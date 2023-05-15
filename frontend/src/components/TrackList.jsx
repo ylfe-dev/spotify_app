@@ -44,6 +44,59 @@ export const  StaticTrackList = ({tracks, limit=99, indexed, image, album, popul
     return null;
 }
 
+export const  AlbumTrackList = ({tracks, context}) => {
+    return (
+    <ol  type="1" className="track-list album">
+      {tracks.map((item, index)=> <Track 
+          key={index}
+          ordnum={index+1}
+          name={item.name}
+          artists={item.artists}
+          id={item.id}
+          duration={item.duration_ms/1000}
+          album={item.album}
+          context={context}
+          />
+        )}
+    </ol>
+  )
+}
+
+export const  QueueTrackList = ({tracks, context}) => {
+
+    return (
+    <ol  type="1" className="track-list player no-index">
+      {tracks.map((item, index)=> <Track 
+          key={index}
+          //ordnum={index+1}
+          image={item.album.images[item.album.images.length-1].url}
+          name={item.name}
+          artists={item.artists}
+          id={item.id}
+          context={context}
+          />
+        )}
+    </ol>
+  )
+}
+
+export const  RecentlyTrackList = ({tracks, context}) => {
+    console.log(tracks)
+    return (
+    <ol  type="1" className="track-list player  no-index">
+      {tracks.map((item, index)=> <Track 
+          key={index}
+          //ordnum={index+1}
+          image={item.track.album.images[item.track.album.images.length-1].url}
+          name={item.track.name}
+          artists={item.track.artists}
+          id={item.track.id}
+          context={context}
+          />
+        )}
+    </ol>
+  )
+}
 
 
 export const  TracksList = ({tracks, context=false}) => {

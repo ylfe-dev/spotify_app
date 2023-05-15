@@ -15,6 +15,9 @@ export const getUserPlaylists = (req, res) => spotifyGET(req, res, "me/playlists
 
 export const getUserAlbums = (req, res) => spotifyGET(req, res, "me/albums")
 
+export const getUserFeatured = (req, res) => spotifyGET(req, res, "browse/featured-playlists?limit=10")
+
+
 
 export const getUserPlayer = (req, res) => spotifyGET(req, res, "me/player")
 
@@ -27,6 +30,13 @@ export const setUserPlayerNext = (req, res) => spotifyPOST(req, res, "me/player/
 export const setUserPlayerPrev = (req, res) => spotifyPOST(req, res, "me/player/previous")
 
 export const setUserPlayerTrack = (req, res) => spotifyPUT(req, res, "me/player/play", PlayTrackJSON(req)) 
+
+export const getUserPlayerQueue = (req, res) => spotifyGET(req, res, "me/player/queue")
+
+export const getUserPlayerRecently = (req, res) => spotifyGET(req, res, "me/player/recently-played")
+
+
+
 
 const PlayTrackJSON = (req) =>{
 	const json= JSON.stringify({

@@ -8,6 +8,7 @@ const userAPI = {
   albums: () => apiFetcher("user/albums", seconds(30)),
   artists: () => apiFetcher("user/artists", seconds(30)),
   playlists: () => apiFetcher("user/playlists", seconds(30)),
+  featured: () => apiFetcher("user/featured", seconds(30)),
 
   player: () => apiFetcher("user/player", 500),
   playerNext: () => apiFetcher("user/player/next", 500, false),
@@ -15,6 +16,8 @@ const userAPI = {
   playerResume: () => apiFetcher("user/player/start", 500, false),
   playerPause: () => apiFetcher("user/player/pause", 500, false),
   playerPlay: (context, id) => apiFetcher("user/player/play/"+context+"/"+id, false, false),
+  queue: () => apiFetcher("user/player/queue", 500),
+  recentlyPlayed: () => apiFetcher("user/player/recenly", 500),
 }
 
 export default userAPI;
