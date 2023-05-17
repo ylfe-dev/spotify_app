@@ -15,9 +15,12 @@ const userAPI = {
   playerPrev: () => apiFetcher("user/player/prev", 500, false),
   playerResume: () => apiFetcher("user/player/start", 500, false),
   playerPause: () => apiFetcher("user/player/pause", 500, false),
-  playerPlay: (context, id) => apiFetcher("user/player/play/"+context+"/"+id, false, false),
+  playerPlay: (id) => apiFetcher("user/player/play/"+id, false, false),
+  playerPlay: (id, context) => apiFetcher("user/player/play/"+id+(context? "/"+context : ""), false, false),
   queue: () => apiFetcher("user/player/queue", 500),
   recentlyPlayed: () => apiFetcher("user/player/recenly", 500),
+  devices: () => apiFetcher("user/player/devices", 500),
+  initDevice: (id) => apiFetcher("user/player/device/"+id, 500),
 }
 
 export default userAPI;

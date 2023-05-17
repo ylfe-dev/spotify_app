@@ -1,6 +1,6 @@
 import './Private.scss';
 
-import { Suspense, useContext } from 'react'
+import { useState, useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpotify } from '@fortawesome/free-brands-svg-icons'
 
@@ -16,13 +16,13 @@ import Player  from '../components/Player'
 
 const Private = () => {
   console.log("Private rerender")
-
+  const [menuState, setMenuState] = useState(false);
   return (
     <main className="app-private">
       <PlayerProvider>
-        <Me />
-        <Player className="app-tile"/>
-        <Content />
+        <Me menuState={menuState} setMenuState={setMenuState}/>
+        <Player className={ menuState ? "mobile-menu-opened" : "" }/>
+        <Content className= {menuState ? "mobile-menu-opened" : "" } />
       </PlayerProvider>
     </main>
   );

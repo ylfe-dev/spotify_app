@@ -41,7 +41,7 @@ export const PlayerProvider = ({children})=> {
   const updateIntervalTime = 20000;
 
   const updateTimeout = useRef();
-  const [player, setPlayer] = useState(null);
+  const [player, setPlayer] = useState(undefined);
 
   useEffect(()=>{
     updatePlayer();
@@ -54,11 +54,12 @@ export const PlayerProvider = ({children})=> {
     next: () => userAPI.playerNext().then(setTimeout(updatePlayer, spotifyUpdateTime)),
     prev: () => userAPI.playerPrev().then(setTimeout(updatePlayer, spotifyUpdateTime)),
     play: (context, id) => userAPI.playerPlay(context, id).then(setTimeout(updatePlayer, spotifyUpdateTime)),
+    initDevice: (id) => userAPI.initDevice(id).then(setTimeout(updatePlayer, spotifyUpdateTime)),
     update: () => updatePlayer()
   }
  
   function updatePlayer() {
-    userAPI.player().then( new_player => setPlayer(new_player));
+    userAPI.player().then( new_player => {setPlayer(new_player); console.log("newplayer: "+new_player)});
     clearTimeout(updateTimeout.current)
     updateTimeout.current = setInterval(updatePlayer, updateIntervalTime)
   }

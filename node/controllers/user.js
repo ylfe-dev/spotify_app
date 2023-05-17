@@ -29,21 +29,25 @@ export const setUserPlayerNext = (req, res) => spotifyPOST(req, res, "me/player/
 
 export const setUserPlayerPrev = (req, res) => spotifyPOST(req, res, "me/player/previous")
 
-export const setUserPlayerTrack = (req, res) => spotifyPUT(req, res, "me/player/play", PlayTrackJSON(req)) 
+export const setUserPlayerTrack = (req, res) => spotifyPUT(req, res, "me/player/play", JSON.stringify({uris: ["spotify:track:"+req.params.id]}))
+
+export const setUserPlayerTrackContext = (req, res) => spotifyPUT(req, res, "me/player/play", PlayTrackJSON(req))  
 
 export const getUserPlayerQueue = (req, res) => spotifyGET(req, res, "me/player/queue")
 
 export const getUserPlayerRecently = (req, res) => spotifyGET(req, res, "me/player/recently-played")
 
+export const getUserPlayerDevices = (req, res) => spotifyGET(req, res, "me/player/devices")
 
+export const setUserPlayerDevice = (req, res) => spotifyPUT(req, res, "me/player/play?device_id="+encodeURI(req.params.id))
 
 
 const PlayTrackJSON = (req) =>{
-	const json= JSON.stringify({
-		context_uri: req.params.context,
-		offset: { uri: "spotify:track:"+req.params.id },
-		position_ms: 0
-	})
-	console.log(json)
-	return json;
+	const data = {};
+
+	data.context_uri = req.params.context;
+	data.offset = { uri: "spotify:track:"+req.params.id };
+	data.position_ms = 0;
+	
+	return  JSON.stringify(data);
 }

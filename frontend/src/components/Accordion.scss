@@ -7,8 +7,12 @@
     grid-row-gap: 1rem;
     max-height: 100%;
     .accordion-item {
-    	@media only screen and (max-height: 800px) {
+    	h3 { margin: 0 0 0.5rem 0 }
+    }
+    @media only screen and (max-height: 800px) {
+	    .accordion-item {
 	    	&:not(.active){
+	    		h3 { margin:0 }
 	    		.collapse{
 		    		display: none;
 		    	}
@@ -21,7 +25,7 @@
 	    		.collapse{
 	    			display: block;
 	    		}
-	    	}
+	    	} 
 	    }
-    }
+	}
 }

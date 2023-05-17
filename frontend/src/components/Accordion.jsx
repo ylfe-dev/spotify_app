@@ -1,7 +1,7 @@
 import "./Accordion.scss"
 import { useState, useRef, useEffect } from 'react'
 
-const  Accordion = ({ children}) => {
+const  Accordion = ({children, className}) => {
 
   const accordion = useRef(null);
 
@@ -29,7 +29,7 @@ const  Accordion = ({ children}) => {
   },[])
 
   return (
-    <div ref={accordion} className="accordion">
+    <div ref={accordion} className={"accordion "+(className ? className : "")}>
       {children}
     </div>
   );

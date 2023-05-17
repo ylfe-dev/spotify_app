@@ -59,9 +59,12 @@ app.get('/api/user/player/next', userController.setUserPlayerNext);
 app.get('/api/user/player/prev', userController.setUserPlayerPrev);
 app.get('/api/user/player/pause', userController.setUserPlayerPause);
 app.get('/api/user/player/start', userController.setUserPlayerPlay);
-app.get('/api/user/player/play/:context/:id', userController.setUserPlayerTrack);
+app.get('/api/user/player/play/:id/:context', userController.setUserPlayerTrackContext);
+app.get('/api/user/player/play/:id', userController.setUserPlayerTrack);
 app.get('/api/user/player/queue', userController.getUserPlayerQueue);
 app.get('/api/user/player/recenly', userController.getUserPlayerRecently);
+app.get('/api/user/player/devices', userController.getUserPlayerDevices);
+app.get('/api/user/player/device/:id', userController.setUserPlayerDevice);
 
 
 app.get('/api/album/:id', contentController.getAlbum);

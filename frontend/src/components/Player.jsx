@@ -2,7 +2,7 @@ import './Player.scss'
 
 import { Suspense, useContext, useEffect, useState, useMemo} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlay, faPause, faForwardStep, faBackwardStep } from '@fortawesome/free-solid-svg-icons'
+import { faPlay, faPause, faForwardStep, faBackwardStep, faDesktop, faMobileScreen } from '@fortawesome/free-solid-svg-icons'
 import { useNavigate } from "react-router-dom";
 
 import { ThemeContext, PlayerContext } from "../ContextProvider"
@@ -20,34 +20,64 @@ const Player = ({className}) =>{
 
 	const {player, playerActions}  = useContext(PlayerContext)
 
-
-
+	const memoPlayer = useMemo(()=>
+		<>
+			<PlayerHistory freshness={(player && player.item) ? player.item.id : null} />
+			<div className="app-player app-tile">
+				{typeof(player) !== "undefined" ? 
+					player == null ? 
+					<SelectDevice playerActions={playerActions}/> 
+					: <PlayerTile playerActions={playerActions} player={player}/>
+				: <Spinner/> }
+			</div>
+			<PlayerQueue freshness={(player && player.item) ? player.item.id : null} />
+		</>
+	,[player]); 
 
 	return  (
-		<section className="app-player-container">
-			<PlayerHistory />
-			<div className={"app-player "+className}>
-				{player ? 
-				<>
-					<PlayerTrackInfo 
-						name={player.item.name}
-						image={player.item.album.images[0].url}
-						artists={player.item.artists} />
-					<PlayerControls 
-						playing={player.is_playing} 
-						playerActions={playerActions}/> 
-				</>
-				: <Spinner/>  
-				}
-			</div>
-			<PlayerQueue />
+		<section className={"app-player-container "+className}>
+			{memoPlayer}
 		</section>
 	)
 }
 
 export default Player;
 
+const PlayerTile = ({playerActions, player})=>{
+	return <>
+		<PlayerTrackInfo 
+			name={player.item.name}
+			image={player.item.album.images[0].url}
+			artists={player.item.artists} />
+		<PlayerControls 
+			playing={player.is_playing} 
+			playerActions={playerActions}/> 
+	</>
+}
 
+const SelectDevice = ({playerActions}) => {
+	const [devices, setDevices] = useState(undefined);
+
+	useEffect(() => {
+		userAPI.devices().then( fetched_devices => setDevices(fetched_devices) )
+	},[])
+
+	function clickDeviceHandler(id) {
+		playerActions.initDevice(id);
+	}
+
+	return (typeof(devices) === "undefined") ? <Spinner/> : 
+		<div className="device-select">
+		{devices.devices.length>0 ? <h4>Select device:</h4>  : <p>No active devices</p> }
+		{ 	
+			devices.devices.map(device => 
+				<button className="device" onClick={()=>clickDeviceHandler(device.id)}>
+					<FontAwesomeIcon icon={device.type == "Computer" ? faDesktop : faMobileScreen} />
+					{device.name}
+				</button>
+			)}
+		</div>
+}
 
 
 
@@ -101,7 +131,7 @@ const PlayerHistory = ({freshness}) => {
 	
 	return recent ? (
 		<div className="player-recent app-tile">
-			<RecentlyTrackList tracks={recent.items} image  context={false}/>
+			<RecentlyTrackList tracks={Array.from(recent.items).reverse()} image  context={false}/>
 		</div>
 	) : null;
 }
@@ -121,7 +151,7 @@ const PlayerQueue = ({freshness}) => {
 	
 	return queue ? (
 		<div className="player-queue app-tile">
-			<QueueTrackList tracks={queue.queue} image  context={false}/>
+			{queue.queue[0] ? <QueueTrackList tracks={queue.queue} image  context={false}/> : <p>No active queue</p>}
 		</div>
 	) : null;
 }

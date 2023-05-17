@@ -63,7 +63,7 @@ export const  AlbumTrackList = ({tracks, context}) => {
 }
 
 export const  QueueTrackList = ({tracks, context}) => {
-
+    console.log("queue rerender")
     return (
     <ol  type="1" className="track-list player no-index">
       {tracks.map((item, index)=> <Track 
@@ -81,7 +81,8 @@ export const  QueueTrackList = ({tracks, context}) => {
 }
 
 export const  RecentlyTrackList = ({tracks, context}) => {
-    console.log(tracks)
+  console.log("recently rerender")
+
     return (
     <ol  type="1" className="track-list player  no-index">
       {tracks.map((item, index)=> <Track 
@@ -150,7 +151,7 @@ const Track = ({className, name, artists, id, image, album, duration, ordnum, co
   const navigate = useNavigate();
 
   const clickArtistHandler = (event, artist_id) => navigate("/artist/"+artist_id)
-  const clickPlayHandler = (event) => playerActions.play(context, id);
+  const clickPlayHandler = (event) => playerActions.play(id, context);
   const clickAlbumHandler = (event) => navigate("/album/"+album.id)
   
 

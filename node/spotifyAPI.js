@@ -3,7 +3,6 @@ import request from './request.js';
 
 
 export const spotifyGET = (req, res, path) => {
-  console.log(req.params ? "params: "+JSON.stringify(req.params):"")
   getToken(req.session.user)
   .then(
     token => spotifyAPI(path, token, "GET", true)
@@ -16,7 +15,6 @@ export const spotifyGET = (req, res, path) => {
 }
 
 export const spotifyPUT = (req, res, path, data=false) => {
-  console.log(data ? "data: "+data:"")
   getToken(req.session.user)
   .then(
     token => spotifyAPI(path, token, "PUT", false, data)
@@ -29,7 +27,6 @@ export const spotifyPUT = (req, res, path, data=false) => {
 }
 
 export const spotifyPOST = (req, res, path) => {
-  console.log(req.params ? "params: "+JSON.stringify(req.params):"")
   getToken(req.session.user)
   .then(
     token => spotifyAPI(path, token, "POST")

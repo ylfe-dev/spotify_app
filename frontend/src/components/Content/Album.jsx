@@ -43,7 +43,7 @@ const AlbumHeader = ({fetcher}) => {
 			<div className="album-title">
 				<h1>{album.name}</h1>
 				<p className="album-artists">
-					{album.artists.map(artist => <span onClick={()=>clickArtistHandler(artist.id)}>{artist.name}</span>)}
+					{album.artists.map(artist => <button  onClick={()=>clickArtistHandler(artist.id)}>{artist.name}</button>)}
 				</p>
 				{album.description ? <p className="playlist-description">{album.description}</p> : null}
 			</div>
@@ -75,7 +75,7 @@ const AlbumTracks = ({fetcher})=>{
 				<AlbumTrackList tracks={album.tracks.items} context={album.uri}/>
 			</div>
 		<p className="album-copyrights">
-			{album.copyrights.map(copyright => <span> {copyright.type == "C" ? "© ": "℗ " } {copyright.text}</span>)}
+			{album.copyrights.map((copyright, index) => <span key={index}> {copyright.type == "C" ? "© ": "℗ " } {copyright.text}</span>)}
 		</p>
 		</section>
 	)

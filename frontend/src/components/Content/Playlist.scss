@@ -1,3 +1,5 @@
+@import "../../envirement.scss";
+
 .app-playlist {
 	display: grid;
 	grid-template-columns: 1fr;
@@ -26,31 +28,35 @@
 		max-height: 180px;
 		overflow: hidden;
 		animation: scalein 1s;
+
 		.playlist-image{
 			grid-area: 1/1/3/2;
+			width:120px !important;
+			height:120px !important;
 		}
 		.playlist-title{
 			overflow: hidden;
-			padding: 1rem 1rem 0 1rem;
+			padding: 0.5rem 0.5rem 0 0.5rem;
 			grid-area: 1/2/2/3;
 			h1 {
+				font-size: 14pt;
 				margin: 0;
 				display: -webkit-box;
-			    -webkit-line-clamp: 2;
+			    -webkit-line-clamp: 1;
 			    -webkit-box-orient: vertical;
 			    text-overflow: ellipsis;
 			    overflow: hidden;
 			}
 			.playlist-owner { 
 				margin: 0.5rem 0;
-				font-size:10pt;
+				font-size:8pt;
 				color:grey;
 			}
 			.playlist-description{
 				margin: 0.5rem 0;
-				font-size:12pt;
+				font-size:10pt;
 				display: -webkit-box;
-			    -webkit-line-clamp: 2;
+			    -webkit-line-clamp: 1;
 			    -webkit-box-orient: vertical;
 			    text-overflow: ellipsis;
 			    overflow: hidden;
@@ -62,6 +68,11 @@
 			text-align: right;
 			align-self: end;
 			margin:0;
+			display: -webkit-box;
+		    -webkit-line-clamp: 1;
+		    -webkit-box-orient: vertical;
+		    text-overflow: ellipsis;
+		    overflow: hidden;
 			span {
 				margin:0 0.5rem;
 				font-size: 10pt;
@@ -69,6 +80,36 @@
 					margin-right: 0.5rem;
 				}
 			}
+		}
+		@media only screen and (min-width: $screen-s) {
+			.playlist-image{
+				width:180px !important;
+				height:180px !important;
+			}
+			.playlist-title{
+				padding: 1rem 1rem 0 1rem;
+				
+				h1{
+					font-size: 16pt;
+					display: -webkit-box;
+				    -webkit-line-clamp: 2;
+				    -webkit-box-orient: vertical;
+				    text-overflow: ellipsis;
+				    overflow: hidden;
+				}
+				.playlist-description{
+					font-size: 12pt;
+					display: -webkit-box;
+				    -webkit-line-clamp: 2;
+				    -webkit-box-orient: vertical;
+				    text-overflow: ellipsis;
+				    overflow: hidden;
+				}
+				.playlist-owner { 
+					font-size: 10pt;
+				}
+			}
+			
 		}
 	}
 	.playlist-tracklist{

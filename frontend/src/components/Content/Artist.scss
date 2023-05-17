@@ -1,3 +1,5 @@
+@import "../../envirement.scss";
+
 $artist-radius: calc( 120px / 2 + 0.3rem);
 
 .app-artist{
@@ -101,8 +103,11 @@ $artist-radius: calc( 120px / 2 + 0.3rem);
 		.albums-year {
 			margin-left:2rem;
 			display: grid;
-			grid-template-columns: 1fr 1fr;
+			grid-template-columns: 1fr;
 			grid-gap: 1rem;
+			@media only screen and (min-width: $screen-s) {
+				grid-template-columns: 1fr 1fr;
+			}
 			.artist-album {
 				display: grid;
 				grid-template-columns: auto 1fr;

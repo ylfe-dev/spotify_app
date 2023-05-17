@@ -3,7 +3,7 @@
 .app-home {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto ;
+	grid-template-rows: 1fr ;
 	grid-row-gap: 1rem;
 	align-items: baseline;
 	overflow: hidden;
@@ -26,36 +26,44 @@
 		max-height: 100%;
 		box-sizing: border-box;
 		h1 {
-			font-size:30pt;
-			margin: 2rem 1rem ; 
+			font-size:20pt;
+			margin: 0rem 0.5rem 1.5rem 0.5rem ;
+			@media only screen and (min-width: $screen-s) {
+				font-size:30pt;
+				margin: 2rem 1rem ;
+			}
 		}
 		.tiles{
 			max-height: 100%;
 			display: flex;
 			flex-flow: row wrap;
 			justify-content: center;
-			gap: 2rem;
+			gap: 1rem;
+			
 			.playlist-tile{
 				display: grid;
 				grid-template-columns: 1fr;
-				grid-template-rows: 150px 80px;
+				grid-template-rows: 100px 80px;
 				align-items: baseline;
-				padding:1rem;
-				width: calc(150px + 2rem);
+				padding:0.5rem;
+				width: calc(100px + 1rem);
 				overflow: hidden;
 				box-sizing: border-box;
 				border-radius: 10px;
 				transition: all 1s;
 				.tile-image{
 					transition: all 1s;
+					width:100px !important;
+					height:100px !important;
 				}
 				.playlist-title {
 					transition: all 1s;
 					h3 {
+						font-size: 12pt;
 						margin: 0.5rem 0;
 					}
 					p {
-						font-size: 10pt;
+						font-size: 9pt;
 						margin: 0.5rem 0;
 					    text-overflow: ellipsis;
 					    overflow: hidden;
@@ -65,11 +73,29 @@
 					cursor:pointer;
 					.tile-image{
 						transform: scale(2);
-
 						filter: blur(5px) brightness(0.6);
 					}
 					.playlist-title {
 						transform: translateY(-100px);
+					}
+				}
+			}
+
+			@media only screen and (min-width: $screen-s) {
+				gap: 2rem;
+				.playlist-tile{
+					grid-template-rows: 150px 80px;
+					padding:1rem;
+					width: calc(150px + 2rem);
+					h3 {
+						font-size: 16pt;
+					}
+					p{
+						font-size: 10pt;
+					}
+					.tile-image{
+						width:150px !important;
+						height:150px !important;
 					}
 				}
 			}
