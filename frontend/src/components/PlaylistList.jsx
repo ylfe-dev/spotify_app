@@ -1,61 +1,58 @@
-import './PlaylistList.scss';
+import "./PlaylistList.scss";
 
-import { Suspense, useState } from 'react'
+import { Suspense, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Spinner from './Spinner'
-import SquareImage from './SquareImage'
+import Spinner from "./Spinner";
+import SquareImage from "./SquareImage";
 
-import { suspensePromise } from '../utils'
+import { suspensePromise } from "../utils";
 
+import user from "../API/user";
 
-import user  from '../API/user'
-
-
-
-
-export const  PlaylistList = ({playlists, image=false, className}) => {
-
+export const PlaylistList = ({ playlists, image = false, className }) => {
   const playlists_obj = playlists.read();
 
-  if(playlists_obj) 
+  if (playlists_obj)
     return (
-      <div className={"playlists-scroller scroller "+className}>
+      <div className={"playlists-scroller scroller " + className}>
         <ol className="playlists-list">
-          {playlists_obj.items.map((item, index)=> 
-             <Playlist 
-                key={index}
-                name={item.name}
-                id={item.id} 
-                tracks={item.tracks.total}
-                image={image ? item.images : false}/>
-          )}
+          {playlists_obj.items.map((item, index) => (
+            <Playlist
+              key={index}
+              name={item.name}
+              id={item.id}
+              tracks={item.tracks.total}
+              image={image ? item.images : false}
+            />
+          ))}
         </ol>
       </div>
     );
-  else 
-    return null;
-}
+  else return null;
+};
 
-
-
-
-
-const Playlist = ({name, id, image, tracks}) => { 
+const Playlist = ({ name, id, image, tracks }) => {
   const navigate = useNavigate();
 
-  const clickHandler = (event) =>{
+  const clickHandler = (event) => {
     event.stopPropagation();
-    navigate("/playlist/"+id)
-  }
+    navigate("/playlist/" + id);
+  };
 
   return (
     <li>
       <button className="playlist-button" onClick={clickHandler}>
-        {image ? <SquareImage className="playlist-image" radius="10px" src={image[0].url} /> : null}
+        {image ? (
+          <SquareImage
+            className="playlist-image"
+            radius="10px"
+            src={image[0].url}
+          />
+        ) : null}
         <h5 className="playlist-name">{name}</h5>
         <p className="playlist-tracks">{tracks}</p>
-       </button>
+      </button>
     </li>
-  )
-}
+  );
+};

@@ -1,32 +1,38 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Suspense, useState, useEffect, useRef } from 'react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Suspense, useState, useEffect, useRef } from "react";
 import "./SquareImage.scss";
-import { suspensePromise } from '../utils'
+import { suspensePromise } from "../utils";
 
-const SquareImage = ({src, className="", radius=0, size="auto"}) => {
+const SquareImage = ({ src, className = "", radius = 0, size = "auto" }) => {
   const imageSRC = useRef(null);
-  const [blobURL, setBlobURL] = useState(null)
+  const [blobURL, setBlobURL] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     setBlobURL(null);
 
-    if(src)
+    if (src)
       fetch(src)
-      .then(res=>res.blob())
-      .then(blob=>URL.createObjectURL(blob))
-      .then(url => setBlobURL(url)).then(imageSRC.current=src)
-  },[src])
+        .then((res) => res.blob())
+        .then((blob) => URL.createObjectURL(blob))
+        .then((url) => setBlobURL(url))
+        .then((imageSRC.current = src));
+  }, [src]);
 
   return (
-    <div className={"square-image "+className} style={{width:size, height:size, borderRadius:radius}}>   
-      {(blobURL && src == imageSRC.current) ? <img src={blobURL}  className="fade-in" /> : <div className="placeholder"></div>  }
+    <div
+      className={"square-image " + className}
+      style={{ width: size, height: size, borderRadius: radius }}
+    >
+      {blobURL && src == imageSRC.current ? (
+        <img src={blobURL} className="fade-in" />
+      ) : (
+        <div className="placeholder"></div>
+      )}
     </div>
-    )
- 
-}
+  );
+};
 
 export default SquareImage;
-
 
 /*
 const SquareImage = ({src, className="", radius=0, size="auto"}) => {

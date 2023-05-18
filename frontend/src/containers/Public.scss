@@ -1,32 +1,31 @@
-.app-public{
-	min-height: 100vh;
-	display: grid;
-	align-content: center;
-	justify-content: center;
-	.app-tile{
-		text-align: center;
-		padding:3rem 4rem;
-		h2{
-			font-weight: 400;
-		}
-		&>svg{
-		 	font-size: 2rem;
-		}
-		transition: all 0.2s;
-	}
-	.app-login-button {
-		display: block;
+.app-public {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  .app-tile {
+    text-align: center;
+    padding: 3rem 4rem;
+    h2 {
+      font-weight: 400;
+    }
+    & > svg {
+      font-size: 2rem;
+    }
+    transition: all 0.2s;
+  }
+  .app-login-button {
+    display: block;
 
-		font-size:1rem;
-		padding: 1rem 2rem;
-		background-color: green;
-		color: white;
-		text-decoration: none;
-		transition: background-color 0.2s;
-		border-radius:10px;
-		&:hover{
-			background-color: black;
-		}
-
-	}
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    background-color: green;
+    color: white;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    border-radius: 10px;
+    &:hover {
+      background-color: black;
+    }
+  }
 }

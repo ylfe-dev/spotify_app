@@ -1,8 +1,10 @@
-.user-saved{
-	padding:  1rem;
-	overflow: hidden;
-	display:grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr;
-	h3 { margin: 0 }
+.user-saved {
+  padding: 1rem;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  h3 {
+    margin: 0;
+  }
 }

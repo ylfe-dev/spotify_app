@@ -1,38 +1,32 @@
-
-
-export const suspensePromise = promise => {
-  let status = 'pending'
-  let response
+export const suspensePromise = (promise) => {
+  let status = "pending";
+  let response;
 
   const suspender = promise.then(
     (res) => {
-      status = 'success'
-      response = res
+      status = "success";
+      response = res;
     },
     (err) => {
-      status = 'error'
-      response = err
-    },
-  )
+      status = "error";
+      response = err;
+    }
+  );
 
   const read = () => {
     switch (status) {
-      case 'pending':
-        throw suspender
-      case 'error':
-        throw response
+      case "pending":
+        throw suspender;
+      case "error":
+        throw response;
       default:
-        return response
+        return response;
     }
-  }
+  };
 
-  return { read }
-}
-  
-export const wait = (ms, data) =>{
-  return new Promise((resolve) => 
-    setTimeout(()=>resolve(data), ms)
-  );
-}
+  return { read };
+};
 
-
+export const wait = (ms, data) => {
+  return new Promise((resolve) => setTimeout(() => resolve(data), ms));
+};

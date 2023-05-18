@@ -1,16 +1,13 @@
-.square-image{
-	overflow: hidden;
-	aspect-ratio: 1;
-	margin:0;
-	padding:0;
-	display: inline-block;
+.square-image {
+  overflow: hidden;
+  aspect-ratio: 1;
+  margin: 0;
+  padding: 0;
+  display: inline-block;
 }
 
-
-.square-image > img, .square-image > div{
-	width:100%;
-	height:100%;
-
+.square-image > img,
+.square-image > div {
+  width: 100%;
+  height: 100%;
 }
-
-

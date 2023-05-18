@@ -1,31 +1,35 @@
 .accordion {
-	overflow: hidden;
-    display: grid;
-    width: 100%;
-    grid-template-columns: 100%;
-    grid-template-rows: 1fr auto auto;
-    grid-row-gap: 1rem;
-    max-height: 100%;
-    .accordion-item {
-    	h3 { margin: 0 0 0.5rem 0 }
+  overflow: hidden;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 100%;
+  grid-template-rows: 1fr auto auto;
+  grid-row-gap: 1rem;
+  max-height: 100%;
+  .accordion-item {
+    h3 {
+      margin: 0 0 0.5rem 0;
     }
-    @media only screen and (max-height: 800px) {
-	    .accordion-item {
-	    	&:not(.active){
-	    		h3 { margin:0 }
-	    		.collapse{
-		    		display: none;
-		    	}
-		    	&:hover {
-	    			cursor: pointer;
-	    			background-color: rgb(255 255 255 / 9%);
-	    		}
-	    	}
-	    	&.active {
-	    		.collapse{
-	    			display: block;
-	    		}
-	    	} 
-	    }
-	}
+  }
+  @media only screen and (max-height: 800px) {
+    .accordion-item {
+      &:not(.active) {
+        h3 {
+          margin: 0;
+        }
+        .collapse {
+          display: none;
+        }
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(255 255 255 / 9%);
+        }
+      }
+      &.active {
+        .collapse {
+          display: block;
+        }
+      }
+    }
+  }
 }

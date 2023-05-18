@@ -1,48 +1,62 @@
 @import "../envirement.scss";
 
 .app-private {
-	display: grid;
-	width: 100vw;
-	height: 100vh;
-	overflow: hidden;
-	box-sizing: border-box;
-	grid-gap: 1rem;
-	grid-template-rows: auto 1fr auto;
-	grid-template-columns: 1fr;
-	padding: 1rem 1rem;
-	.app-me{ grid-row: 1}
-	.app-content { grid-row: 2 }
-	.app-player-container { grid-row: 3}
-	
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box;
+  grid-gap: 1rem;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr;
+  padding: 1rem 1rem 0 1rem;
+  .app-me {
+    grid-row: 1;
+  }
+  .app-content {
+    grid-row: 2;
+  }
+  .app-player-container {
+    grid-row: 3;
+  }
 
-	
-	@media only screen and (min-width: $screen-m) {
-		padding:2rem 2rem;
-		grid-column-gap: 2rem;
-	    grid-row-gap: 1rem;
-	    grid-template-rows: 1fr auto;
-		grid-template-columns: 300px  1fr;
+  @media only screen and (min-width: $screen-m) {
+    padding: 2rem 2rem;
+    grid-column-gap: 2rem;
+    grid-row-gap: 1rem;
+    grid-template-rows: 1fr auto;
+    grid-template-columns: 300px 1fr;
 
-		.app-me{ grid-area: 1/1/2/2}
-		.app-content { grid-area: 1/2/3/3 }
-		.app-player-container { grid-area: 2/1/3/2}
+    .app-me {
+      grid-area: 1/1/2/2;
+    }
+    .app-content {
+      grid-area: 1/2/3/3;
+    }
+    .app-player-container {
+      grid-area: 2/1/3/2;
+    }
 
-		.app-content{
-			min-width:500px;
-		}
-	}
-	@media only screen and (min-width: $screen-l) {
-		grid-template-rows: 1fr;
-		grid-template-columns: 300px  1fr 300px;
-		padding:2rem 3rem;
+    .app-content {
+      min-width: 500px;
+    }
+  }
+  @media only screen and (min-width: $screen-l) {
+    grid-template-rows: 1fr;
+    grid-template-columns: 300px 1fr 300px;
+    padding: 2rem 3rem;
 
-		.app-me{ grid-area: 1/1/2/2}
-		.app-content { grid-area: 1/2/2/3 }
-		.app-player-container { grid-area: 1/3/2/4}
-		
-	}
-	@media only screen and (min-width: $screen-xl) {
-
-		padding:2rem 4rem;
-	}
+    .app-me {
+      grid-area: 1/1/2/2;
+    }
+    .app-content {
+      grid-area: 1/2/2/3;
+    }
+    .app-player-container {
+      grid-area: 1/3/2/4;
+    }
+  }
+  @media only screen and (min-width: $screen-xl) {
+    padding: 2rem 4rem;
+  }
 }

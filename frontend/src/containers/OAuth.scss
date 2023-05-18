@@ -1,20 +1,20 @@
-.app-oauth{
-	width:100%;
-	min-height: 100vh;
-	display: grid;
-	align-content: center;
-	justify-content: center;
-	.app-tile{
-		position: relative;
-		padding:3rem 4rem 4rem 4rem;
-		text-align: center;
-		svg {
-			font-size: 2rem;
-		}
-		.app-button {
-			right:0;
-			bottom:0;
-			position: absolute;
-		}
-	}
+.app-oauth {
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  .app-tile {
+    position: relative;
+    padding: 3rem 4rem 4rem 4rem;
+    text-align: center;
+    svg {
+      font-size: 2rem;
+    }
+    .app-button {
+      right: 0;
+      bottom: 0;
+      position: absolute;
+    }
+  }
 }

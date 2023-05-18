@@ -1,7 +1,7 @@
 version: "2"
 services:
 
-  node:
+  backend:
     image: "node:19"
     user: 1000:1000
     networks:
@@ -12,12 +12,12 @@ services:
     environment:
       - NODE_ENV=production
     volumes:
-      - ./node:/home/node/app
+      - ./backend:/home/node/app
     command: "npm start"
     depends_on:
       - redis
-    
-    
+
+
   frontend:
     image: "node:19"
     user: 1000:1000
@@ -31,19 +31,21 @@ services:
     volumes:
       - ./frontend:/home/node/app
     command: "npm start"
-    
-    
-    
+
+
+
   redis:
     image: redis
     user: 1000:1000
-    networks: 
+    networks:
       - spotify_app
     volumes:
       - ./redis/data:/data
       - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
     command: redis-server --requirepass passwd --save 60 1 --loglevel warning
-    
+
+
+
   insights:
     image: redislabs/redisinsight:latest
     user: 1000:1000

@@ -1,13 +1,13 @@
 .app-spinner {
-	display: inline-block;
-	display: grid;
-	align-content: center;
-	justify-content: center;
-	svg{
-		color:white;
-		font-size:2rem;
-		animation: 1.3s spin infinite linear;
-	}
+  display: inline-block;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  svg {
+    color: white;
+    font-size: 2rem;
+    animation: 1.3s spin infinite linear;
+  }
 }
 
 @keyframes spin {

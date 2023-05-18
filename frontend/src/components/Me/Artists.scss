@@ -1,5 +1,9 @@
-.user-artists{
-	padding: 1rem;
-	&.active h3 { margin: 0 0 0.5rem 0 }
-	h3 { margin: 0 }
+.user-artists {
+  padding: 1rem;
+  &.active h3 {
+    margin: 0 0 0.5rem 0;
+  }
+  h3 {
+    margin: 0;
+  }
 }
