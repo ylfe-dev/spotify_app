@@ -13,7 +13,8 @@ import { AuthContext } from "../ContextProvider";
 import oauthAPI from "../API/oauth";
 
 const Public = () => {
-  console.log("Public rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Public rerender");
   const session_fetch = suspensePromise(oauthAPI.probe());
   const { user } = useContext(AuthContext);
 
@@ -44,8 +45,8 @@ const Login = ({ fetcher }) => {
         <FontAwesomeIcon icon={faUser} />
         <h2>Let's explore music!</h2>
         <a href={session.oauth_link} className="app-login-button mt-2">
-          Login with <b className="ms-1">Spotify</b>
-          <FontAwesomeIcon className="ms-1" icon={faSpotify} />
+          Login with <b className="ms-1" style={{display: "inline-block"}}>Spotify
+          <FontAwesomeIcon className="ms-1" icon={faSpotify} /></b>
         </a>
       </div>
     );

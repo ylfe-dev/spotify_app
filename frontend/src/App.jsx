@@ -9,7 +9,8 @@ import Public from "./containers/Public";
 const App = () => {
   const userContext = useContext(AuthContext);
 
-  console.log("App rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("App rerender");
 
   if (userContext.user) return <Private />;
   else return <Public />;

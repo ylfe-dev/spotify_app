@@ -7,6 +7,7 @@ const contentAPI = {
   artistTop: (id, country) =>
     apiFetcher("artist/" + id + "/top/" + country, 3600 * 1000),
   artistAlbums: (id) => apiFetcher("artist/" + id + "/albums", 3600 * 1000),
+  search: (query) => apiFetcher("search/" +  encodeURI(query) , 60 * 1000),
 };
 
 export default contentAPI;

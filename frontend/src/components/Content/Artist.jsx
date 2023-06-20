@@ -26,7 +26,9 @@ const Artist = ({ id }) => {
   );
   const artistAlbums_promise = suspensePromise(contentAPI.artistAlbums(id));
 
-  console.log("Artist Content rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Artist Content rerender");
+  
   return (
     <div className="app-artist">
       <Suspense fallback={<Spinner />}>

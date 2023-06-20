@@ -10,6 +10,9 @@ import Saved from "./Saved";
 import Artists from "./Artists";
 import Playlists from "./Playlists";
 import Accordion from "../Accordion";
+import Search from "./Search";
+
+
 
 const Me = ({ menuState, setMenuState }) => {
   const navigate = useNavigate();
@@ -40,6 +43,9 @@ const Me = ({ menuState, setMenuState }) => {
       <button id="go-home" onClick={goHomeHandle}>
         <FontAwesomeIcon icon={faHome} />
       </button>
+
+      <Search />
+      
       <div className={"app-menu " + (menuState ? "active" : "hidden")}>
         {memoAccordion}
       </div>

@@ -21,7 +21,8 @@ const Background = () => {
     setLayer(!layer);
   };
 
-  console.log("background rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Background rerender");
 
   return (
     <>

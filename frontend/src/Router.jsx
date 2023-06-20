@@ -6,7 +6,9 @@ import OAuth from "./containers/OAuth";
 import Background from "./components/Background";
 
 const Router = () => {
-  console.log("router rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Router rerender");
+  
   const app = (
     <>
       <Background />

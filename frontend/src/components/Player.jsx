@@ -21,7 +21,8 @@ import Spinner from "./Spinner";
 import userAPI from "../API/user";
 
 const Player = ({ className }) => {
-  console.log("player rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("player rerender");
 
   const { player, playerActions } = useContext(PlayerContext);
 
@@ -32,8 +33,8 @@ const Player = ({ className }) => {
           freshness={player && player.item ? player.item.id : null}
         />
         <div className="app-player app-tile">
-          {typeof player !== "undefined" ? (
-            player == null ? (
+          {typeof player !== undefined ? (
+            (!player || !player.item ) ? (
               <SelectDevice playerActions={playerActions} />
             ) : (
               <PlayerTile playerActions={playerActions} player={player} />

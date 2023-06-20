@@ -8,7 +8,8 @@ export const PlayerContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  console.log("🔒 auth context rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("🔒 Auth context rerender");
   return (
     <AuthContext.Provider value={{ user: user, setUser: setUser }}>
       {children}
@@ -18,7 +19,8 @@ export const AuthProvider = ({ children }) => {
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(false);
-  console.log("🎴 theme context rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("🎴 Theme context rerender");
   return (
     <ThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
       {children}
@@ -27,7 +29,8 @@ export const ThemeProvider = ({ children }) => {
 };
 
 export const PlayerProvider = ({ children }) => {
-  console.log("🎵 player context rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("🎵 Player context rerender");
 
   const spotifyUpdateTime = 1500;
   const updateIntervalTime = 20000;
@@ -49,10 +52,11 @@ export const PlayerProvider = ({ children }) => {
       userAPI.playerNext().then(setTimeout(updatePlayer, spotifyUpdateTime)),
     prev: () =>
       userAPI.playerPrev().then(setTimeout(updatePlayer, spotifyUpdateTime)),
-    play: (context, id) =>
-      userAPI
+    play: (context, id) => player ? 
+        userAPI
         .playerPlay(context, id)
-        .then(setTimeout(updatePlayer, spotifyUpdateTime)),
+        .then(setTimeout(updatePlayer, spotifyUpdateTime))
+        : null,
     initDevice: (id) =>
       userAPI.initDevice(id).then(setTimeout(updatePlayer, spotifyUpdateTime)),
     update: () => updatePlayer(),

@@ -12,3 +12,5 @@ export const getArtist = (req, res) => spotifyGET(req, res, "artists/"+encodeURI
 export const getArtistTop = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id)+"/top-tracks?market="+encodeURI(req.params.country))
 
 export const getArtistAlbums = (req, res) => spotifyGET(req, res, "artists/"+encodeURI(req.params.id)+"/albums?include_groups="+encodeURI("single,album"))
+
+export const getSearch = (req, res) => spotifyGET(req, res, "search?q="+encodeURI(req.params.query)+"&type="+encodeURI("track,album,artist,playlist")+"&limit=3")

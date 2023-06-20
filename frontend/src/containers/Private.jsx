@@ -10,11 +10,12 @@ import { suspensePromise, wait } from "../utils";
 
 import Me from "../components/Me";
 import Content from "../components/Content";
-import About from "../components/About";
 import Player from "../components/Player";
 
+
 const Private = () => {
-  console.log("Private rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Private rerender");
   const [menuState, setMenuState] = useState(false);
   return (
     <main className="app-private">

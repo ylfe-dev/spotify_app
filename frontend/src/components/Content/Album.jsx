@@ -19,7 +19,8 @@ import SquareImage from "../SquareImage";
 
 const Album = ({ id }) => {
   const album_promise = suspensePromise(contentAPI.album(id));
-  console.log("Album rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Album rerender");
   return (
     <div className="app-album">
       <Suspense fallback={<Spinner />}>
@@ -54,7 +55,7 @@ const AlbumHeader = ({ fetcher }) => {
         <h1>{album.name}</h1>
         <p className="album-artists">
           {album.artists.map((artist) => (
-            <button onClick={() => clickArtistHandler(artist.id)}>
+            <button key={artist.id} onClick={() => clickArtistHandler(artist.id)}>
               {artist.name}
             </button>
           ))}
@@ -84,7 +85,6 @@ const AlbumHeader = ({ fetcher }) => {
 
 const AlbumTracks = ({ fetcher }) => {
   const album = fetcher.read();
-  console.log(album);
   return (
     <section className="album-tracklist app-tile">
       <h3 className="tracklist-header">
@@ -100,7 +100,7 @@ const AlbumTracks = ({ fetcher }) => {
         {album.copyrights.map((copyright, index) => (
           <span key={index}>
             {" "}
-            {copyright.type == "C" ? "© " : "℗ "} {copyright.text}
+            {copyright.text}
           </span>
         ))}
       </p>

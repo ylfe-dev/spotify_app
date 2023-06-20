@@ -16,7 +16,8 @@ const usePlayer = () => {
   });
 
   function updatePlayer() {
-    console.log("🎵 player context update");
+    if(process.env.REACT_APP_LOGS==="debug")
+      console.log("🎵 player context update");
     userAPI.player().then((new_player) => setPlayer(new_player));
   }
 

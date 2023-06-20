@@ -77,7 +77,8 @@ export const AlbumTrackList = ({ tracks, context }) => {
 };
 
 export const QueueTrackList = ({ tracks, context }) => {
-  console.log("queue rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("queue rerender");
   return (
     <ol type="1" className="track-list player no-index">
       {tracks.map((item, index) => (
@@ -96,7 +97,8 @@ export const QueueTrackList = ({ tracks, context }) => {
 };
 
 export const RecentlyTrackList = ({ tracks, context }) => {
-  console.log("recently rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("recently rerender");
 
   return (
     <ol type="1" className="track-list player  no-index">
@@ -138,25 +140,27 @@ export const TracksList = ({ tracks, context = false }) => {
 };
 
 export const TrackList = ({ tracks, context = false }) => {
-  return (
-    <ol type="1" className="track-list">
-      {tracks.map((item, index) => (
-        <Track
-          key={index}
-          ordnum={index + 1}
-          image={
-            item.track.album.images[item.track.album.images.length - 1].url
-          }
-          name={item.track.name}
-          artists={item.track.artists}
-          id={item.track.id}
-          duration={item.track.duration_ms / 1000}
-          album={item.track.album}
-          context={context}
-        />
-      ))}
-    </ol>
-  );
+    return (
+      <ol type="1" className="track-list">
+        {tracks.map((item, index) => {
+          if(item.track)
+            return <Track
+              key={index}
+              ordnum={index + 1}
+              image={
+                item.track.album.images[item.track.album.images.length - 1].url
+              }
+              name={item.track.name}
+              artists={item.track.artists}
+              id={item.track.id}
+              duration={item.track.duration_ms / 1000}
+              album={item.track.album ? item.track.album : console.log(item.track)}
+              context={context}
+            />
+          else return null
+        })}
+      </ol>
+   );
 };
 
 export default TrackList;

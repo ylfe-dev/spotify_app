@@ -15,8 +15,7 @@ const userAPI = {
   playerPrev: () => apiFetcher("user/player/prev", 500, false),
   playerResume: () => apiFetcher("user/player/start", 500, false),
   playerPause: () => apiFetcher("user/player/pause", 500, false),
-  playerPlay: (id) => apiFetcher("user/player/play/" + id, false, false),
-  playerPlay: (id, context) =>
+  playerPlay: (id, context=false) =>
     apiFetcher(
       "user/player/play/" + id + (context ? "/" + context : ""),
       false,

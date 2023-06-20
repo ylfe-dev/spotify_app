@@ -18,7 +18,8 @@ import SquareImage from "../SquareImage";
 
 const Playlist = ({ id }) => {
   const playlists_promise = suspensePromise(contentAPI.playlist(id));
-  console.log("Playlist rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Playlist rerender");
   return (
     <div className="app-playlist">
       <Suspense fallback={<Spinner />}>
@@ -34,7 +35,8 @@ export default Playlist;
 const PlaylistHeader = ({ fetcher, className }) => {
   const playlist = fetcher.read();
 
-  console.log("Playlist header rerender");
+  if(process.env.REACT_APP_LOGS==="debug")
+    console.log("Playlist header rerender");
 
   return playlist ? (
     <header className={className}>

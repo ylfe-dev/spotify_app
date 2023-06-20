@@ -11,13 +11,14 @@ import * as oAuthController from './controllers/oAuth.js';
 import * as contentController from './controllers/content.js';
 
 
-
 const app = express();
+
 const port = 3002;
 const ssl_options = {
   key:   fs.readFileSync( 'private/localhost.key' ),
   cert:  fs.readFileSync( 'private/localhost.crt' ),
 }
+
 
 
 const redisClient = await RedisClient();
@@ -73,7 +74,7 @@ app.get('/api/artist/:id', contentController.getArtist);
 app.get('/api/artist/:id/top/:country', contentController.getArtistTop);
 app.get('/api/artist/:id/albums', contentController.getArtistAlbums);
 
-
+app.get('/api/search/:query', contentController.getSearch);
 
 
 
