@@ -1,3 +1,5 @@
+@import "../../envirement.scss";
+
 .app-search {
 	position: relative;
 	padding:0;
@@ -27,10 +29,12 @@
 		display: inline-grid;
 		width:2.5rem;
 		height:2.5rem;
-		&:hover {
-			cursor:pointer;
-			background-color: black;
-			color:white;
+		@media (pointer: fine) {
+			&:hover {
+				cursor:pointer;
+				background-color: black;
+				color:white;
+			}
 		}
 		svg {
 			align-self: center;
@@ -42,110 +46,160 @@
 		left:0;
 		bottom:0;
 	}
-	section.search-results{
-		display: grid;
-		padding: 1rem 0;
-		overflow: hidden;
-		position: absolute;
-		top:100%;
-		left:0;
-		width:100%;
-		max-width: 100%;
-		margin-top:1rem;
-		border-radius:10px;
-		background-color: white;
-		z-index:190;
-		color:black;
-		&.fallback{
-			animation: search_in 0.25s forwards;
-			svg {
-				color:#dbdbdb;
-			}
+
+}
+
+section.search-results{
+	max-height:100%;
+	box-sizing: border-box;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	padding: 1rem 0.5rem 1rem 0;
+	overflow: hidden;
+	position: absolute;
+	top:0%;
+	left:0;
+	width:300px;
+	margin:0;
+	border-radius:10px;
+	background-color: white;
+	z-index:190;
+	color:black;
+	.scroller {
+		max-height:100%;
+		overflow-y: auto;
+		&::-webkit-scrollbar {
+		    width: 7px;
+		    height: 7px;
+		  }
+		  &::-webkit-scrollbar-track {
+		    background: rgba(0, 0, 0, 0.1);
+		    border-radius: 10px;
+		  }
+		  &::-webkit-scrollbar-thumb {
+		    background-color: rgba(0, 0, 0, 0.4);
+		    border-radius: 20px;
+
+		    border: transparent;
+		  }
+	}
+	&.fallback{
+		animation: search_in 0.25s forwards;
+		svg {
+			color:#dbdbdb;
 		}
-		ul {
-			margin:0;
-			padding:0;
-			li{
-				list-style: none;
-				button {
-					position: relative;
-					background-color: white;
-					display: grid;
-					grid-template-columns: auto 1fr;
-					border:none;
-					width:100%;
-					margin:0;
+	}
+	ul {
+		margin:0;
+		padding:0;
+		li{
+			list-style: none;
+			button {
+				position: relative;
+				background-color: white;
+				display: grid;
+				grid-template-columns: auto 1fr;
+				border:none;
+				width:100%;
+				margin:0;
+				padding:0.5rem 1rem;
+				.action-icon {
+					opacity: 0;
 					padding:0.5rem 1rem;
+					position: absolute;
+					left:0;
+					top:0;
+					bottom:0;
+					width:2.5rem;
+					z-index: 100;
+					display: grid;
+					transition: opacity 0.3s;
+					svg {
+						align-self: center;
+						justify-self: center;
+						font-size: 1.3rem;
+					}
+				}
+				.image{
+					//grid-area: 1/1/2/2;
+					align-self: center;
+					width:2.5rem !important;
+					transition: opacity 0.3s;
+				}
+				.title{
+					//grid-area: 1/2/2/3;
+					align-self: center;
+					max-width: 100%;
+					overflow: hidden;
+				}
+				h5{
+					text-overflow: ellipsis;
+					text-wrap:nowrap;
+					overflow: hidden;
+					font-size: 10pt;
+					font-weight: normal;
+					text-align: left;
+					margin:0;
+					padding:0 1rem;
+					
+				}
+				p{
+					text-align: left;
+					margin:0;
+					padding: 0 1rem;
+					font-size: 9pt;
+				}
+				&:hover{
+					background-color:#ededed;
+					cursor:pointer;
 					.action-icon {
-						opacity: 0;
-						padding:0.5rem 1rem;
-						position: absolute;
-						left:0;
-						top:0;
-						bottom:0;
-						width:2.5rem;
-						z-index: 100;
-						display: grid;
-						transition: opacity 0.3s;
-						svg {
-							align-self: center;
-							justify-self: center;
-							font-size: 1.3rem;
-						}
+						opacity: 1;
 					}
 					.image{
-						//grid-area: 1/1/2/2;
-						align-self: center;
-						width:2.5rem !important;
-						transition: opacity 0.3s;
-					}
-					.title{
-						//grid-area: 1/2/2/3;
-						align-self: center;
-						max-width: 100%;
-						overflow: hidden;
-					}
-					h5{
-						text-overflow: ellipsis;
-						text-wrap:nowrap;
-						overflow: hidden;
-						font-size: 10pt;
-						font-weight: normal;
-						text-align: left;
-						margin:0;
-						padding:0 1rem;
-						
-					}
-					p{
-						text-align: left;
-						margin:0;
-						padding: 0 1rem;
-						font-size: 9pt;
-					}
-					&:hover{
-						background-color:#ededed;
-						cursor:pointer;
-						.action-icon {
-							opacity: 1;
-						}
-						.image{
-							opacity: 0.1;
-						}
+						opacity: 0.1;
 					}
 				}
 			}
 		}
-		&.loading{
-			button{
-				color: grey;
-				.image{
-					opacity: 0.5;
-				}
+	}
+	&.loading{
+		button{
+			color: grey;
+			.image{
+				opacity: 0.5;
 			}
 		}
+	}
 
+}
+
+
+@media only screen and (max-width: $screen-s) {
+	.app-search:not(.active) {
+		input {
+			display:none;
+		}
 	}
 }
+
+@media only screen and (max-width: $screen-m) {
+	.app-search {
+		label {
+			font-size: 1.6rem;
+			width: 56px;
+			height:56px;
+		}
+	}
+	section.search-results {
+		grid-area: unset;
+		width:100%;
+		top: calc(56px + 1rem);
+    	max-height: calc(100vh - 56px - 90px - 3rem);
+	}
+}
+
+
 
 @keyframes search_in {
   from {

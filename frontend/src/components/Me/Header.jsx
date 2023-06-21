@@ -24,10 +24,7 @@ const Header = () => {
       />
       <div className="user-stats">
         <LogoutButton />
-        <span>
-          <FontAwesomeIcon icon={faEye} />
-          {user.followers.total}
-        </span>
+        
       </div>
     </header>
   );
@@ -42,7 +39,7 @@ const LogoutButton = () => {
   }
   return (
     <button className="logout-button button" onClick={clickHandler}>
-      <FontAwesomeIcon icon={faPowerOff} />
+      <FontAwesomeIcon icon={faPowerOff} /> Logout
     </button>
   );
 };

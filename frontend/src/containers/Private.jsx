@@ -13,6 +13,7 @@ import Content from "../components/Content";
 import Player from "../components/Player";
 
 
+
 const Private = () => {
   if(process.env.REACT_APP_LOGS==="debug")
     console.log("Private rerender");
@@ -23,6 +24,7 @@ const Private = () => {
         <Me menuState={menuState} setMenuState={setMenuState} />
         <Player className={menuState ? "mobile-menu-opened" : ""} />
         <Content className={menuState ? "mobile-menu-opened" : ""} />
+   
       </PlayerProvider>
     </main>
   );

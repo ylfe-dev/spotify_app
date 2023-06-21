@@ -3,7 +3,7 @@ import { Suspense, useState, useEffect, useRef } from "react";
 import "./SquareImage.scss";
 import { suspensePromise } from "../utils";
 
-const SquareImage = ({ src, className = "", radius = 0, size = "auto" }) => {
+const SquareImage = ({ src=false, className = "", radius = 0, size = "auto" }) => {
   const imageSRC = useRef(null);
   const [blobURL, setBlobURL] = useState(null);
 

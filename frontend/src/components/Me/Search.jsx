@@ -10,8 +10,9 @@ import { PlayerContext } from "../../ContextProvider";
 import { useNavigate } from "react-router-dom";
 
 
-const Search = () => {
+const Search = ({className}) => {
 	const [query, setQuery] = useState("")
+	const [active, setActive] = useState(false)
   const [results, setResult] = useState(null);
   const deferredResults = useDeferredValue(results);
 	const write_timeout = useRef(null)
@@ -22,7 +23,7 @@ const Search = () => {
   	ev.stopPropagation();
   
   	setQuery(ev.target.value);
-  	
+
   	if(ev.target.value===""){
   		setResult(null)
   		clearTimeout(write_timeout.current);
@@ -37,37 +38,43 @@ const Search = () => {
 	}
   
   function activateSearch() {
-  	return null;
+  	setActive(true)
   }
 
   function quitSearch() {
   	setQuery("")
   	setResult(null)
+  	setActive(false)
   }
 
+  const opts = {}
+  if(active) opts["autofocus"] = "autofocus";
 
   return (
-    <div className="app-search app-tile">
-      <input 
-      id="search_input" 
-      type="search" 
-      value={query}
-      placeholder="Search..."
-      onChange={queryHandler}/>
-      <label htmlFor="search_input" onClick={query === "" ? activateSearch : quitSearch}>
-      	<FontAwesomeIcon icon={query === "" ? faMagnifyingGlass : faXmark}/>
-      </label>
-      { deferredResults && query  ? 
+  	<>
+	    <div className={"app-search app-tile " + (active? "active" : "")}>
+	      <input 
+	      {...opts}
+	      id="search_input" 
+	      type="search" 
+	      value={query}
+	      placeholder="Search..."
+	      onChange={queryHandler}/>
+	      <label htmlFor="search_input" onClick={(query !== "" || active) ?  quitSearch : activateSearch}>
+	      	<FontAwesomeIcon icon={(query !== "" || active) ? faXmark : faMagnifyingGlass }/>
+	      </label>
+	    </div>
+	    { deferredResults && query  ? 
 	      <Suspense fallback={
 	      	<section className="search-results fallback">
 	      		<Spinner/>
 	      	</section>
 	      }>
-	        <SearchResults results={deferredResults} loading={results !== deferredResults}/>
+	        <SearchResults results={deferredResults} loading={results !== deferredResults} quit={quitSearch}/>
 	      </Suspense>
 	      : null 
 	    }
-    </div>
+	  </>
   );
 };
 
@@ -75,7 +82,7 @@ export default Search;
 
 
 
-const SearchResults = ({results, loading, fallback}) => {
+const SearchResults = ({results, loading, quit}) => {
 	
 		//return <section className="search-results"><Spinner /></section>
 	
@@ -83,11 +90,13 @@ const SearchResults = ({results, loading, fallback}) => {
 	console.log(search_results)
 	return(
 		<section className={"search-results " + ( loading? "loading" : "")}>
-			<ul>
-				{search_results.tracks.items.map(track => <TrackResult track={track}/>)}
-				{search_results.artists.items.map(artist => <ArtistResult artist={artist}/>)}
-				{search_results.playlists.items.map(playlist => <PlaylistResult playlist={playlist}/>)}
-			</ul>
+			<div className="scroller">
+				<ul onClick={quit}>
+					{search_results.tracks.items.map(track => <TrackResult track={track}/>)}
+					{search_results.artists.items.map(artist => <ArtistResult artist={artist}/>)}
+					{search_results.playlists.items.map(playlist => <PlaylistResult playlist={playlist}/>)}
+				</ul>
+			</div>
 		</section>
 	)
 	
@@ -106,7 +115,7 @@ const TrackResult = ({track}) => {
 			<div className="action-icon">
 				<FontAwesomeIcon icon={true ? faPlay : faEye}/>
 			</div>
-			<SquareImage className="image track-image" radius="10px" src={track.album.images[0].url}/>
+			<SquareImage className="image track-image" radius="10px" src={track.album.images[0] ? track.album.images[0].url : null}/>
 			<div className="title">
 				<h5>{track.name}</h5>
 				<p>track</p>
@@ -129,7 +138,7 @@ const ArtistResult = ({artist}) => {
 			<div className="action-icon">
 				<FontAwesomeIcon icon={faEye}/>
 			</div>
-			<SquareImage className="image artist-image" radius="100px" src={artist.images[0].url}/>
+			<SquareImage className="image artist-image" radius="100px" src={artist.images[0] ? artist.images[0].url : null}/>
 			<div className="title">
 				<h5>{artist.name}</h5>
 				<p>artist</p>
@@ -153,7 +162,7 @@ const  PlaylistResult = ({playlist}) => {
 			<div className="action-icon">
 				<FontAwesomeIcon icon={faEye}/>
 			</div>
-			{playlist.images[0] ? <SquareImage className="image artist-image" radius="10px" src={playlist.images[0].url}/> : null }
+			{playlist.images[0] ? <SquareImage className="image artist-image" radius="10px" src={playlist.images[0] ? playlist.images[0].url : false}/> : null }
 			<div className="title">
 				<h5>{playlist.name}</h5>
 				<p>playlist</p>

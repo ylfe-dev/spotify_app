@@ -53,14 +53,14 @@ const ArtistHeader = ({ fetcher, fetcherAlbums }) => {
 
   return artist ? (
     <header>
-      {artist.images[0] ? (
+      
         <SquareImage
           className="artist-image"
           size={120}
           radius={100}
-          src={artist.images[0].url}
+          src={artist.images[0] ? artist.images[0].url : null}
         />
-      ) : null}
+     
       <div className="artist-title">
         <h1>{artist.name}</h1>
       </div>

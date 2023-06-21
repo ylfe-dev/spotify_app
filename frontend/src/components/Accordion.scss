@@ -1,3 +1,5 @@
+@import "../envirement.scss";
+
 .accordion {
   overflow: hidden;
   display: grid;
@@ -11,7 +13,13 @@
       margin: 0 0 0.5rem 0;
     }
   }
-  @media only screen and (max-height: 800px) {
+
+
+
+  @media  screen  and (max-width:  $screen-l) 
+                  and (min-width:  $screen-m) 
+                  and (max-height: 950px),
+          screen  and (max-height: 800px) {
     .accordion-item {
       &:not(.active) {
         h3 {
@@ -32,4 +40,13 @@
       }
     }
   }
+
+  @media only screen and (min-height: 800px) and (min-width:  $screen-l),
+              screen and (min-height: 950px) and (min-width:  $screen-m) and (max-width:  $screen-l),
+              screen and (max-width: $screen-m) and (min-height: 800px)
+   {
+      grid-template-rows: 1fr 1fr auto !important;
+  }
 }
+
+

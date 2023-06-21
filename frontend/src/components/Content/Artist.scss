@@ -189,7 +189,7 @@ $artist-radius-s: calc(70px / 2 + 0.2rem);
     }
   }
 
-  @media only screen and (min-width: $screen-s) {
+  @media only screen and (min-width: $screen-s) and  (min-height: 800px) {
     .artist-overview {
       border-top-left-radius: $artist-radius;
       border-top-right-radius: $artist-radius;

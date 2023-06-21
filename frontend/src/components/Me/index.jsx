@@ -1,8 +1,14 @@
 import "./Me.scss";
 
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faHome } from "@fortawesome/free-solid-svg-icons";
+import { 
+  faBars, 
+  faHome, 
+  faArrowLeft, 
+  faUpRightAndDownLeftFromCenter, 
+  faDownLeftAndUpRightToCenter } from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 
 import Header from "./Header";
@@ -12,14 +18,23 @@ import Playlists from "./Playlists";
 import Accordion from "../Accordion";
 import Search from "./Search";
 
-
+const server_url = window.location.protocol +"//" + window.location.host;
 
 const Me = ({ menuState, setMenuState }) => {
+  const [fullScreen, setFullScrenn] = useState(false)
   const navigate = useNavigate();
   const location = useLocation();
 
   const burgerMenuHandle = () => setMenuState(!menuState);
   const goHomeHandle = () => navigate("/");
+  const handleBack = () => navigate(-1);
+  const handleFullScreen = () =>  {
+    setFullScrenn(!fullScreen)
+    if (fullScreen) document.exitFullscreen();
+    else  document.body.requestFullscreen();
+  }
+
+  
 
   useEffect(() => setMenuState(false), [location]);
 
@@ -36,6 +51,14 @@ const Me = ({ menuState, setMenuState }) => {
 
   return (
     <section className="app-me">
+
+      <div className={"app-menu " + (menuState ? "active" : "hidden")}>
+        {memoAccordion}
+        <Footer/>
+      </div>
+
+      <Search/>
+
       <Header className="app-tile" />
       <button id="burger-menu" onClick={burgerMenuHandle}>
         <FontAwesomeIcon icon={faBars} />
@@ -43,14 +66,27 @@ const Me = ({ menuState, setMenuState }) => {
       <button id="go-home" onClick={goHomeHandle}>
         <FontAwesomeIcon icon={faHome} />
       </button>
-
-      <Search />
+      <button id="go-fullscreen" onClick={handleFullScreen}>
+        <FontAwesomeIcon 
+        icon={fullScreen ? faDownLeftAndUpRightToCenter : faUpRightAndDownLeftFromCenter} />
+      </button>
+      <button id="go-back" onClick={handleBack}>
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
       
-      <div className={"app-menu " + (menuState ? "active" : "hidden")}>
-        {memoAccordion}
-      </div>
+      
+      
     </section>
   );
 };
 
 export default Me;
+
+
+
+const  Footer = () => 
+  <footer>
+    <a href="https://github.com/bartkon"><FontAwesomeIcon icon={faGithub} /></a>
+    <p>Powered by </p>
+    <img src={server_url + "/spotify.svg"}/>
+  </footer>
