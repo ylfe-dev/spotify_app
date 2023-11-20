@@ -17,8 +17,7 @@ import Artists from "./Artists";
 import Playlists from "./Playlists";
 import Accordion from "../Accordion";
 import Search from "./Search";
-
-const server_url = window.location.protocol +"//" + window.location.host;
+import Footer from "../Footer"
 
 const Me = ({ menuState, setMenuState }) => {
   const [fullScreen, setFullScrenn] = useState(false)
@@ -84,9 +83,3 @@ export default Me;
 
 
 
-const  Footer = () => 
-  <footer>
-    <a href="https://github.com/bartkon"><FontAwesomeIcon icon={faGithub} /></a>
-    <p>Powered by </p>
-    <img src={server_url + "/spotify.svg"}/>
-  </footer>

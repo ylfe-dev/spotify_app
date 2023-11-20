@@ -28,7 +28,7 @@
     grid-gap: 0.5rem;
     max-height: 180px;
     overflow: hidden;
-    animation: scalein 1s;
+    animation: scalein .4s;
     .album-image {
       width:100px !important;
       height:100px !important;
@@ -99,7 +99,7 @@
     overflow: hidden;
     padding: 0.5rem;
     //padding-bottom: 0;
-    animation: slidein_top 1s;
+    animation: slidein_top .4s;
     .tracklist-header {
       padding-right: 0.5rem;
       margin: 0.5rem 0 0.9rem 0;

@@ -1,9 +1,9 @@
 .app-public {
   min-height: 100vh;
   display: grid;
-  align-content: center;
-  justify-content: center;
   .app-tile {
+    align-self: end;
+    justify-self: center;
     text-align: center;
     padding: 3rem 3rem;
     h2 {
@@ -16,7 +16,6 @@
   }
   .app-login-button {
     display: block;
-
     font-size: 1rem;
     padding: 1rem 2rem;
     background-color: green;
@@ -28,4 +27,9 @@
       background-color: black;
     }
   }
+  footer {
+    align-self: end;
+    margin-bottom:1rem;
+  }
+
 }

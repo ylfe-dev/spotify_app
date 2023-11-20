@@ -23,7 +23,7 @@ $artist-radius-s: calc(70px / 2 + 0.2rem);
     display: grid;
     overflow: hidden;
     grid-template-rows: auto 1fr;
-    animation: scalein 1s;
+    animation: scalein 0.4s;
     header {
       color: black;
       background-color: white;
@@ -95,7 +95,7 @@ $artist-radius-s: calc(70px / 2 + 0.2rem);
     overflow: hidden;
     overflow-y: auto;
     padding: 0.5rem;
-    animation: slidein_top 1s;
+    animation: slidein_top .4s;
     h2 {
       font-size: 15pt;
       margin: 0.2rem 0 0 0.5rem;

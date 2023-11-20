@@ -9,6 +9,7 @@ $blur-edge: calc(3 * $blur-radius);
   position: fixed;
   z-index: -1;
   div {
+    will-change: opacity;
     top: -$blur-edge;
     bottom: -$blur-edge;
     left: -$blur-edge;
@@ -18,6 +19,6 @@ $blur-edge: calc(3 * $blur-radius);
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    transition: opacity 1s;
+    transition: opacity 0.5s;
   }
 }

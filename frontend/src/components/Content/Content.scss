@@ -1,12 +1,57 @@
 @import "../../envirement.scss";
 
+
+
+
 .app-content {
   overflow: hidden;
-  transition: transform 0.5s;
-  &.mobile-menu-opened {
-    transform: translateX(300px);
-    @media only screen and (min-width: $screen-m) {
-      transform: translateX(0px);
+  will-change: transform, opacity;
+  @media only screen and (max-width: $screen-l) {
+    animation: content_in 0.4s forwards linear ;
+    &.mobile-menu-opened {
+      animation: content_out 0.1s forwards linear;
     }
+  }
+}
+
+
+@keyframes content_in {
+  from {
+    //transform: translateX(300px);
+   opacity: 0;
+  }
+  to {
+    //transform: translateX(0px);
+   opacity: 1;
+  }
+}
+
+@keyframes  content_out {
+  from {
+   // transform: translateX(0px);
+   opacity: 1;
+  }
+  to {
+    //transform: translateX(300px);
+   opacity: 0;
+  }
+}
+
+
+@keyframes content_int {
+  from {
+    transform: translateX(300px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes  content_outt {
+  from {
+   transform: translateX(0px);
+  }
+  to {
+    transform: translateX(300px);
   }
 }

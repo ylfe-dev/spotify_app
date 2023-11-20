@@ -41,9 +41,9 @@
     }
   }
 
-  @media only screen and (min-height: 800px) and (min-width:  $screen-l),
+  @media only screen and (min-height: 801px) and (min-width:  $screen-l),
               screen and (min-height: 950px) and (min-width:  $screen-m) and (max-width:  $screen-l),
-              screen and (max-width: $screen-m) and (min-height: 800px)
+              screen and (max-width: $screen-m) and (min-height: 801px)
    {
       grid-template-rows: 1fr 1fr auto !important;
   }

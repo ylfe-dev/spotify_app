@@ -11,6 +11,8 @@ import { suspensePromise } from "../utils";
 import { AuthContext } from "../ContextProvider";
 
 import oauthAPI from "../API/oauth";
+import Footer from "../components/Footer"
+
 
 const Public = () => {
   if(process.env.REACT_APP_LOGS==="debug")
@@ -41,14 +43,19 @@ const Login = ({ fetcher }) => {
 
   if (session && session.oauth_link)
     return (
-      <div className="app-tile scale-in">
-        <FontAwesomeIcon icon={faUser} />
-        <h2>Let's explore music!</h2>
-        <a href={session.oauth_link} className="app-login-button mt-2">
-          Login with <b className="ms-1" style={{display: "inline-block"}}>Spotify
-          <FontAwesomeIcon className="ms-1" icon={faSpotify} /></b>
-        </a>
-      </div>
+      <>
+        <div className="app-tile scale-in">
+          <FontAwesomeIcon icon={faUser} />
+          <h2>Let's explore music!</h2>
+          <a href={session.oauth_link} className="app-login-button mt-2">
+            Login with <b className="ms-1" style={{display: "inline-block"}}>Spotify
+            <FontAwesomeIcon className="ms-1" icon={faSpotify} /></b>
+          </a>
+        </div>
+
+        <Footer />
+      </>
     );
   else return null;
 };
+

@@ -67,7 +67,7 @@
 .fade-in {
   animation: 0.5s fadein;
   &.short {
-    animation-duration: 0.2s;
+    animation-duration: 0.25s;
   }
   &.long {
     animation-duration: 1s;
@@ -77,7 +77,7 @@
 .scale-in {
   animation: 0.5s scalein;
   &.short {
-    animation-duration: 0.2s;
+    animation-duration: 0.25s;
   }
   &.long {
     animation-duration: 1s;

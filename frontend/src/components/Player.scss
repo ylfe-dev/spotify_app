@@ -9,13 +9,13 @@
 
   transition: transform 0.5s;
   transform: translateX(0px);
-  &.mobile-menu-opened {
-    transform: translateX(300px);
-    @media only screen and (min-width: $screen-m) {
-      transform: translateX(0px);
+  @media only screen and (max-width: $screen-l) {
+    animation: player_in 0.4s forwards linear;
+    &.mobile-menu-opened {
+      animation: player_out 0.2s forwards linear;   
     }
   }
-  .app-player {
+    .app-player {
     margin: 0 -1rem;
     border-radius: 10px 10px 0 0 ;
     display: grid;
@@ -189,5 +189,29 @@
     .player-title {
       padding: 1rem;
     }
+  }
+}
+
+
+
+@keyframes player_in {
+  from {
+    //transform: translateX(300px);
+   opacity: 0;
+  }
+  to {
+    //transform: translateX(0px);
+   opacity: 1;
+  }
+}
+
+@keyframes  player_out {
+  from {
+   // transform: translateX(0px);
+   opacity: 1;
+  }
+  to {
+    //transform: translateX(300px);
+   opacity: 0;
   }
 }

@@ -1,5 +1,9 @@
 @import "../../envirement.scss";
 
+
+$curve: ease-out;//cubic-bezier(.5,0,0,.5);
+$time: 0.3s;
+
 .app-me {
   display: grid;
   position: relative;
@@ -14,7 +18,7 @@
   #go-home,
   #go-back,
   #go-fullscreen
-   {
+  {
     align-self: center;
     margin: 0;
     height: 56px;
@@ -52,55 +56,30 @@
   }
 
   .app-menu {
+    will-change: transform, opacity;
     position: fixed;
     display: flex;
     flex-direction: column;
     top: calc(56px + 1rem);
     bottom: 0;
     left: 0;
-    width: min(100vw, 300px);
+    width: 100vw;
     padding: 1rem;
     box-sizing: border-box;
     z-index: 100;
-    footer{
-      margin-top: 0.8rem;
-      grid-column-gap: 0.5rem;
-      display: grid;
-      grid-template-columns: 1fr auto auto auto 1fr;
-      color: white;
-      
-      a {
-        grid-column: 2;
-        text-align: right;
-        color:white;
-        text-decoration: none;
-        
-        svg {
-          font-size: 22px;
-        }
-      }
-      p {
-        grid-column: 3;
-        font-size: 10pt;
-        align-self: center;
-        margin: 0;
-      }
-      img {
-        height: 22px;
-        grid-column: 4;
-      }
+    footer {
+     margin-top: 0.8rem;
     }
     &.active {
-      animation: slidein_left 0.5s forwards;
+      animation: slidein_lefts $time forwards ease-out;
     }
     &.hidden {
-      animation: slideout_left 0.5s forwards;
+      animation: slideout_lefts $time forwards ease-in;
     }
   }
 
   
   @media only screen and (max-width: $screen-s) {
-
     .app-search.active {
       grid-area: 1/1/2/6;
       & ~ header, 
@@ -124,7 +103,7 @@
       }
        & ~ #go-fullscreen {display: grid}
       & ~ header {
-        animation: slidein_left 0.5s forwards;
+        animation: slidein_left $time forwards ease-out;
         display: grid;
         grid-area: 1/1/2/4;
       }
@@ -132,6 +111,15 @@
   }
  
   @media only screen and (min-width: $screen-s) {
+    .app-menu {
+      width: 300px;
+       &.active {
+        animation: slidein_left $time forwards ease-out;
+      }
+      &.hidden {
+        animation: slideout_left $time forwards ease-in;
+      }
+    }
     #go-back {
       display: none;
     }
@@ -199,6 +187,30 @@
   }
   to {
     transform: translateX(-300px);
+    opacity: 0;
+  }
+}
+
+
+
+@keyframes slidein_lefts {
+  from {
+    transform: translateX(-100vw);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slideout_lefts {
+  from {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100vw);
     opacity: 0;
   }
 }
