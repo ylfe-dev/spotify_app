@@ -5,9 +5,8 @@ A developer version of web Spotify app (react frontend + oAuth + Node.js backend
 
 <br />
 
-<p>
-<video src="https://ylfe.dev/assets/Yspotify_pc.webm" width="700">
-</p>
+[Yspotify_pc.webm](https://github.com/ylfe-dev/spotify_app/assets/111587746/3eed615e-71aa-4623-9027-aa43864de7d2)
+
 
 <br />
 
@@ -33,6 +32,4 @@ Enjoy on `localhost:3001`
 
 <br />
 
-<p>
-<video src="https://ylfe.dev/assets/Yspotify_mobile.webm" height="600">
-</p>
+[Yspotify_mobile.webm](https://github.com/ylfe-dev/spotify_app/assets/111587746/08e5a646-92f7-4a2e-b581-bc3ff0fde39e)
